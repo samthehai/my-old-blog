@@ -1,0 +1,213 @@
+.heading2Xl {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.05rem;
+  margin: 1rem 0;
+}
+
+.headingXl {
+  font-size: 2rem;
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: -0.05rem;
+  margin: 1rem 0;
+}
+
+.headingLg {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin: 1rem 0;
+}
+
+.headingMd {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.borderCircle {
+  border-radius: 9999px;
+}
+
+.colorInherit {
+  color: inherit;
+}
+
+.padding1px {
+  padding-top: 1px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  margin: 0 0 1.25rem;
+}
+
+.lightText {
+  color: #666;
+}
+
+.article {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 22px;
+    padding-bottom: 5px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 200%;
+    margin-bottom: 15px;
+  }
+
+  img {
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  ul,
+  ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  li {
+    line-height: 200%;
+    margin-top: 10px;
+  }
+
+  a {
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      background-color: black;
+      color: white;
+    }
+  }
+
+  pre {
+    padding: 15px 20px 20px 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  code,
+  code span {
+    font-family: "Consolas", "Monaco", "Ubuntu Mono", "Andale Mono", monospace;
+  }
+
+  p code,
+  li code {
+    background-color: #eeeeee;
+    padding: 0 5px 0 5px;
+  }
+
+  blockquote {
+    border-left: 3px #dfdfdf solid;
+    padding-left: 15px;
+  }
+
+  blockquote p {
+    font-family: "Noto Serif KR", serif;
+    font-style: italic;
+  }
+
+  table {
+    border-spacing: unset;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 5px 10px 5px 10px;
+    border: 1px black solid;
+  }
+
+  sup {
+    font-size: 11px;
+  }
+
+  section {
+    margin-bottom: 15px;
+
+    .katex {
+      * {
+        font-family: "Times New Roman", serif;
+      }
+    }
+  }
+
+  p {
+    .katex {
+      * {
+        font-family: "Times New Roman", serif;
+        font-size: 16px;
+      }
+
+      .msupsub {
+        * {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+
+  .footnotes-sep {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-top: 0;
+    border-bottom: 1px black solid;
+  }
+
+  .footnotes {
+    > .footnotes-list {
+      padding: 0;
+      font-size: 14px;
+      counter-reset: list;
+
+      > .footnote-item {
+        list-style-position: inherit;
+        list-style: none;
+
+        &:before {
+          content: "[" counter(list) "] ";
+          counter-increment: list;
+        }
+
+        > p {
+          font-size: 14px;
+          display: inline;
+        }
+      }
+    }
+  }
+}

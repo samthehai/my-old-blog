@@ -1,19 +1,25 @@
 import Head from 'next/head'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
+import styles from './layout.module.scss'
+import utilStyles from '../styles/utils.module.scss'
 import Link from 'next/link'
 
-const name = '[Your Name]'
-export const siteTitle = 'Next.js Sample Website'
+const name = 'Hai Sam'
+export const siteTitle = 'Hai Sam\'s Blog'
 
-export default function Layout({ children, home }) {
+export default function Layout({
+  children,
+  home
+}: {
+  children: React.ReactNode
+  home?: boolean
+}) {
   return (
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="Learn how to build a personal website using Next.js"
+          content="My personal blog"
         />
         <meta
           property="og:image"
@@ -28,7 +34,7 @@ export default function Layout({ children, home }) {
         {home ? (
           <>
             <img
-              src="/images/profile.jpg"
+              src="/images/profile.png"
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
               alt={name}
             />
@@ -39,7 +45,7 @@ export default function Layout({ children, home }) {
             <Link href="/">
               <a>
                 <img
-                  src="/images/profile.jpg"
+                  src="/images/profile.png"
                   className={`${styles.headerImage} ${utilStyles.borderCircle}`}
                   alt={name}
                 />

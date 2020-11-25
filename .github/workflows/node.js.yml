@@ -1,4 +1,4 @@
-name: samthehai
+name: gh pages
 
 # masterブランチにプッシュしたときjobsに記述した操作を行う
 on:

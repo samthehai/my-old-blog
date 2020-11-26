@@ -1,0 +1,738 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="description" content="My personal blog"/><meta property="og:image" content="https://og-image.now.sh/Hai%20Sam&#x27;s%20Blog.png?theme=light&amp;md=0&amp;fontSize=75px&amp;images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg"/><meta name="og:title" content="Hai Sam&#x27;s Blog"/><meta name="twitter:card" content="summary_large_image"/><title>Golang dành cho dân lập trình C</title><link rel="preload" href="/_next/static/css/a7b17ee9c118794ec99f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/a7b17ee9c118794ec99f.css" data-n-g=""/><link rel="preload" href="/_next/static/css/ef8b6818b7474fff8094.css" as="style"/><link rel="stylesheet" href="/_next/static/css/ef8b6818b7474fff8094.css" data-n-p=""/><noscript data-n-css="true"></noscript><link rel="preload" href="/_next/static/chunks/main-d283b4ab393ebd284c3e.js" as="script"/><link rel="preload" href="/_next/static/chunks/webpack-e067438c4cf4ef2ef178.js" as="script"/><link rel="preload" href="/_next/static/chunks/framework.9ec1f7868b3e9d138cdd.js" as="script"/><link rel="preload" href="/_next/static/chunks/commons.e3c12cb767780eaa6561.js" as="script"/><link rel="preload" href="/_next/static/chunks/pages/_app-ded95831299dc0ee3969.js" as="script"/><link rel="preload" href="/_next/static/chunks/7989c093b81d86ddb0abfb342d5bc2e84730435d.a106123a322eba1d4442.js" as="script"/><link rel="preload" href="/_next/static/chunks/pages/posts/%5Bid%5D-f3a8cc6c89a99a8d726d.js" as="script"/></head><body><div id="__next"><div class="layout_container__3sC0E"><header class="layout_header__3KufH"><a href="/"><img src="/images/profile.png" class="layout_headerImage__1Y87s utils_borderCircle__16bu1" alt="Hai Sam"/></a><h2 class="utils_headingLg__3uZpz"><a class="utils_colorInherit__rOQns" href="/">Hai Sam</a></h2></header><main><article class="utils_article__HvuVf"><h1 class="utils_headingXl__3wKvI">Golang dành cho dân lập trình C</h1><div class="utils_lightText__3895Y"><time dateTime="2020-03-15">March 15, 2020</time></div><div><h1>1. Giới thiệu về Go</h1>
+<h2>1.1. Động lực</h2>
+<table>
+<thead>
+<tr>
+<th>Hiện tại đang có</th>
+<th style="text-align:center">Muốn</th>
+<th style="text-align:right">Golang</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code khó hiểu và không an toàn</td>
+<td style="text-align:center">Dễ đọc, code an toàn và hiệu quả</td>
+<td style="text-align:right">Nhỏ gọn mà biểu diễn tốt</td>
+</tr>
+<tr>
+<td>Build code siêu chậm</td>
+<td style="text-align:center">Một hệ thống có thể mở rộng (scale)</td>
+<td style="text-align:right">Kiểu dữ liệu tĩnh (statically) và có hỗ trợ thu dọn rác (garbage collected)</td>
+</tr>
+<tr>
+<td>Không có hỗ trợ lập trình đồng bộ</td>
+<td style="text-align:center">Hỗ trợ lập trình đồng bộ tốt</td>
+<td style="text-align:right">Đối tượng nhưng không định hướng kiểu (type - oriented)</td>
+</tr>
+<tr>
+<td>Tools cũ kĩ</td>
+<td style="text-align:center">Những Tools mà có thể hoạt động tại những hệ thống lớn như Google</td>
+<td style="text-align:right">Hỗ trợ lập trình đồng bộ tốt</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:right">Hiện thực hiệu quả</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:right">Thư viện chuẩn phong phú</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:right">Biên dịch nhanh</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:right">Tools có thể mở rộng được</td>
+</tr>
+</tbody>
+</table>
+<h2>1.2. Hello World</h2>
+<pre class="hljs"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+  fmt.Println(<span class="hljs-string">"Hello, 世界!"</span>)
+}
+</code></pre>
+<h2>1.3. Syntax</h2>
+<blockquote>
+<p>Syntax is not important… - unless you are a programmer.</p>
+</blockquote>
+<p>Rob Pike.</p>
+<blockquote>
+<p>The readability of programs is immeasurably more important than their writeability.</p>
+</blockquote>
+<p>Hints on Programming Language Design</p>
+<p>C. A. R. Hoare 1973</p>
+<h3>1.3.1. Quá dài dòng</h3>
+<pre class="hljs"><code><span class="hljs-function">scoped_ptr&lt;logStats::LogStats&gt;
+    <span class="hljs-title">logStats</span><span class="hljs-params">(logStats::LogStats::NewLogStats(FLAGS_logStats,logStats::LogStats::kFIFO))</span></span>;
+</code></pre>
+<h3>1.3.2. Quá dày đặc</h3>
+<pre class="hljs"><code>(n: <span class="hljs-type">Int</span>) =&gt; (<span class="hljs-number">2</span> to n) |&gt; (r =&gt; r.foldLeft(r.toSet)((ps, x) =&gt;
+    <span class="hljs-keyword">if</span> (ps(x)) ps <span class="hljs-comment">-- (x * x to n by x) else ps))</span>
+</code></pre>
+<h3>1.3.3. Chuẩn</h3>
+<pre class="hljs"><code>t := time.Now()
+<span class="hljs-keyword">switch</span> {
+<span class="hljs-keyword">case</span> t.Hour() &lt; <span class="hljs-number">12</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"morning"</span>
+<span class="hljs-keyword">case</span> t.Hour() &lt; <span class="hljs-number">18</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"afternoon"</span>
+<span class="hljs-keyword">default</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"evening"</span>
+}
+</code></pre>
+<h2>1.4. Đọc code Go</h2>
+<h3>1.4.1. Packages</h3>
+<p>Một chương trình Go sẽ bao gồm các packages.
+Một packages sẽ bao gồm 1 hoặc nhiều files mã nguồn (go files).
+Một file mã nguồn sẽ bắt đầu với lệnh package như khai báo dưới này:</p>
+<pre class="hljs"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+    fmt.Println(<span class="hljs-string">"Hello, 世界!"</span>)
+}
+</code></pre>
+<p>Theo quy ước thì tất cả các file thuộc về một package sẽ nằm chung một thư mục.</p>
+<h3>1.4.2. Khai báo, sử dụng Pascal-style (từ trái sang phải)</h3>
+<p>Pattern: &lt;keyword&gt; &lt;tên&gt; [kiểu dữ liệu][khởi tạo]</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span>
+
+<span class="hljs-keyword">const</span> digits = <span class="hljs-string">"0123456789abcdef"</span>
+
+<span class="hljs-keyword">type</span> Point <span class="hljs-keyword">struct</span> {
+    x, y <span class="hljs-keyword">int</span>
+    tag  <span class="hljs-keyword">string</span>
+}
+
+<span class="hljs-keyword">var</span> s [<span class="hljs-number">32</span>]<span class="hljs-keyword">byte</span>
+
+<span class="hljs-keyword">var</span> msgs = []<span class="hljs-keyword">string</span>{<span class="hljs-string">"Hello, 世界"</span>, <span class="hljs-string">"Ciao, Mondo"</span>}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">itoa</span><span class="hljs-params">(x, base <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">string</span></span>
+</code></pre>
+<h3>1.4.3. Why?</h3>
+<pre class="hljs"><code>p, q *Point
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">adder</span><span class="hljs-params">(delta <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">func</span><span class="hljs-params">(x <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span></span>
+</code></pre>
+<h3>1.4.4. Constants (Hằng số)</h3>
+<p>Trong Go, constants thì chính xác về mặt toán học
+Không cần thiết phải có hậu tố phía sau (như là -42LL, 7UL,…)</p>
+<pre class="hljs"><code><span class="hljs-keyword">const</span> (
+    MaxUInt = <span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">64</span> - <span class="hljs-number">1</span>
+    Pi      = <span class="hljs-number">3.14159265358979323846264338327950288419716939937510582097494459</span>
+    Pi2     = Pi * Pi
+    Delta   = <span class="hljs-number">2.0</span>
+)
+</code></pre>
+<p>Chỉ khi được sử dụng constant mới được cắt ngắn theo kích thước.</p>
+<pre class="hljs"><code>    <span class="hljs-keyword">var</span> x <span class="hljs-keyword">uint64</span> = MaxUInt
+    <span class="hljs-keyword">var</span> pi2 <span class="hljs-keyword">float32</span> = Pi2
+    <span class="hljs-keyword">var</span> delta <span class="hljs-keyword">int</span> = Delta
+</code></pre>
+<p>Lợi thế lớn là ở tính dễ đọc và dễ sử dụng</p>
+<h3>1.4.5. Types (Kiểu)</h3>
+<ul>
+<li>Phần quen thuộc:
+<ul>
+<li>Kiểu cơ bản, arrays, structs, pointers, functions.</li>
+</ul>
+</li>
+<li>Tuy nhiên:
+<ul>
+<li>string là kiểu cơ bản</li>
+<li>Không có tự động chuyển đổi kiểu cơ bản trong dòng lệnh.</li>
+<li>Không có tính toán pointer (con trỏ), pointer và array là khác nhau.</li>
+<li>Một kiểu function sẽ đại diện cho 1 function; context và tất cả</li>
+</ul>
+</li>
+<li>Mới:
+<ul>
+<li>Slices thay vì array pointer + độ dài khác nhau: []int</li>
+<li>Maps bởi vì mọi người đều cần nó: map[string]int</li>
+<li>Interfaces được dùng cho việc đa hình (polymorphism): interface {}</li>
+<li>Channels để giao tiếp giữa các goroutines: chan int</li>
+</ul>
+</li>
+</ul>
+<h3>1.4.6. Biến</h3>
+<ul>
+<li>Phần quen thuộc:</li>
+</ul>
+<pre class="hljs"><code><span class="hljs-keyword">var</span> i <span class="hljs-keyword">int</span>
+<span class="hljs-keyword">var</span> p, q *Point
+<span class="hljs-keyword">var</span> threshold <span class="hljs-keyword">float64</span> = <span class="hljs-number">0.75</span>
+</code></pre>
+<ul>
+<li>Mới: Kiểu có thể được diễn giải từ cách khởi tạo</li>
+</ul>
+<pre class="hljs"><code><span class="hljs-keyword">var</span> i = <span class="hljs-number">42</span>       <span class="hljs-comment">// type của i là int</span>
+<span class="hljs-keyword">var</span> z = <span class="hljs-number">1</span> + <span class="hljs-number">2.3i</span> <span class="hljs-comment">// type của z là complex128</span>
+</code></pre>
+<ul>
+<li>Shortcut (bên trong functions):</li>
+</ul>
+<pre class="hljs"><code>i := <span class="hljs-number">42</span> <span class="hljs-comment">// type của i là int</span>
+</code></pre>
+<ul>
+<li>Thao tác lấy địa chỉ của bất kì biến nào là an toàn:</li>
+</ul>
+<pre class="hljs"><code><span class="hljs-keyword">return</span> &amp;i
+</code></pre>
+<h3>1.4.7. Functions</h3>
+<p>Function có thể trả về nhiều giá trị:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">atoi</span><span class="hljs-params">(s <span class="hljs-keyword">string</span>)</span> <span class="hljs-params">(i <span class="hljs-keyword">int</span>, err error)</span></span>
+</code></pre>
+<p>Closures</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">addler</span><span class="hljs-params">(delta <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">func</span><span class="hljs-params">(x <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span></span> {
+  f := <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(x <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span></span> {
+    <span class="hljs-keyword">return</span> x + delta;
+  }
+  <span class="hljs-keyword">return</span> f
+}
+</code></pre>
+<pre class="hljs"><code><span class="hljs-keyword">var</span> inc = addler(<span class="hljs-number">1</span>)
+fmt.Println(inc(<span class="hljs-number">0</span>))
+fmt.Println(addler(<span class="hljs-number">-1</span>)(<span class="hljs-number">10</span>))
+</code></pre>
+<h3>1.4.8. Statments (Câu lệnh)</h3>
+<pre class="hljs"><code>t := x;
+<span class="hljs-keyword">switch</span> {
+<span class="hljs-keyword">case</span> x == <span class="hljs-number">0</span>:
+  <span class="hljs-keyword">return</span> <span class="hljs-string">"0"</span>
+<span class="hljs-keyword">case</span> x &lt; <span class="hljs-number">0</span>:
+  t = -x
+}
+<span class="hljs-keyword">var</span> s [<span class="hljs-number">32</span>]<span class="hljs-keyword">byte</span>
+i := <span class="hljs-built_in">len</span>(s)
+<span class="hljs-keyword">for</span> t != <span class="hljs-number">0</span> {
+  i--
+  s[i] = digits[t%base]
+  t /= base
+}
+<span class="hljs-keyword">if</span> x &lt; <span class="hljs-number">0</span> {
+  i--
+  s[i] = <span class="hljs-string">'-'</span>
+}
+<span class="hljs-keyword">return</span> <span class="hljs-keyword">string</span>(s[i:])
+</code></pre>
+<h3>1.4.9. Statement của Go dành cho người lập trình C</h3>
+<ul>
+<li>Làm rõ ràng hơn:
+<ul>
+<li>Không có dấu chấm phẩy</li>
+<li>Gán nhiều giá trị</li>
+<li>++ và – cũng là câu lệnh</li>
+<li>Không có dấu mở đóng ngoặc ở điều kiện, dấu mở đóng ngoặc nhọn là bắt buộc</li>
+<li>Break được ngầm hiểu trong switch, làm rõ ràng việc fallthrough</li>
+</ul>
+</li>
+<li>Mới:
+<ul>
+<li>for range</li>
+<li>type switch</li>
+<li>go, select</li>
+<li>defer</li>
+</ul>
+</li>
+</ul>
+<h3>1.4.10. Assignment (Gán giá trị)</h3>
+<p>Có thể gán nhiều giá trị đồng thời</p>
+<pre class="hljs"><code>a, b  = x, y
+</code></pre>
+<p>Bằng với</p>
+<pre class="hljs"><code>t1 := x
+t2 := y
+a = t1
+b = t2
+</code></pre>
+<p>Ví dụ</p>
+<pre class="hljs"><code>a, b = b, a       <span class="hljs-comment">// swap a and b</span>
+i, err = atoi(s)  <span class="hljs-comment">// assign results of atoi</span>
+i, _ = atoi(<span class="hljs-number">991</span>)  <span class="hljs-comment">// discard 2nd value</span>
+</code></pre>
+<h3>1.4.11. Switch statements</h3>
+<p>Switch statement có thể có nhiều case và break được hiểu ngầm</p>
+<pre class="hljs"><code><span class="hljs-keyword">switch</span> {
+<span class="hljs-keyword">case</span> <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>:
+  tag = <span class="hljs-string">"workday"</span>
+<span class="hljs-keyword">case</span> <span class="hljs-number">0</span>, <span class="hljs-number">6</span>:
+  tag = <span class="hljs-string">"weekend"</span>
+<span class="hljs-keyword">default</span>:
+  tag = <span class="hljs-string">"invalid"</span>
+}
+</code></pre>
+<p>Giá trị trong case thì không bắt buộc phải là constanst</p>
+<pre class="hljs"><code><span class="hljs-keyword">switch</span> {
+<span class="hljs-keyword">case</span> day &lt; <span class="hljs-number">0</span> || day &gt; <span class="hljs-number">6</span>:
+  tag = <span class="hljs-string">"invalid"</span>
+<span class="hljs-keyword">case</span> day == <span class="hljs-number">0</span> || day == <span class="hljs-number">6</span>:
+  tag = <span class="hljs-string">"weekend"</span>
+<span class="hljs-keyword">default</span>:
+  tag = <span class="hljs-string">"workday"</span>
+}
+</code></pre>
+<h3>1.4.12. Vòng lặp for</h3>
+<pre class="hljs"><code><span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(primes); i++ {
+  fmt.Println(i, primes[i])
+}
+</code></pre>
+<p>Mệnh đề range cho phép duyệt qua array và slice dễ dàng</p>
+<pre class="hljs"><code><span class="hljs-keyword">for</span> i, x := <span class="hljs-keyword">range</span> primes {
+  fmt.Println(i, x)
+}
+</code></pre>
+<p>Những giá trị không sử dụng được bỏ qua bằng cách gán vào định danh (identifier) _</p>
+<pre class="hljs"><code><span class="hljs-keyword">var</span> sum <span class="hljs-keyword">int</span>
+<span class="hljs-keyword">for</span> _, x := <span class="hljs-keyword">range</span> primes {
+  sum += x
+}
+</code></pre>
+<h2>1.5. Dependencies (Phụ thuộc)</h2>
+<h3>1.5.1. Dependence trong Go</h3>
+<p>Một khai báo import được dùng để mô tả một dependency trong một package khác:</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-string">"net/rpc"</span>
+</code></pre>
+<p>Ở đây importing package phụ thuộc vào Go package “rpc”</p>
+<p>Đường dẫn import (“net/rpc”) xác định duy nhất một package; nhiều packages có thể có cùng tên, nhưng chúng lại có thể nằm ở những vị trí khác nhau (thư mục)</p>
+<p>Quy định thì tên của package sẽ là phần tử cuối cùng của đường dẫn import (ở đây là “rpc”)</p>
+<p>Chức năng export của package rpc thì sẵn có ở trong package qualifier (rpc):</p>
+<pre class="hljs"><code>rpc.Call
+</code></pre>
+<p>Một khai báo import trong Go có vai trò giống như include trong C.</p>
+<h3>1.5.2. Dạo quanh một vòng với cách đặt tên trong Go</h3>
+<p>Cách mà tên hoạt động thì có ảnh hưởng quan trọng đến tính dễ đọc.</p>
+<p>Scope thì quyết định cách thức hoạt động của tên.</p>
+<p>Go có một cấu trúc scope tương đối đơn giản:</p>
+<ul>
+<li>universe</li>
+<li>package</li>
+<li>file (chỉ được dùng cho việc import)</li>
+<li>function</li>
+<li>block</li>
+</ul>
+<h3>1.5.3. Tính cục bộ của tên (TODO)</h3>
+<p>Tên viết hoa sẽ được exported: Name vs name</p>
+<p>Package qualifier luôn đại diện cho tên được import</p>
+<p>Component đầu tiên của mọi tên luôn được khai báo trong package hiện tại</p>
+<p>Đây là 1 trong những quyết định đúng đắn và khó khăn nhất trong Go</p>
+<h3>1.5.4. Mở rộng cục bộ (Locality scales)</h3>
+<p>Không có bất ngờ khi import</p>
+<ul>
+<li>Việc export thêm 1 tên sẽ không phá vỡ package của tôi.</li>
+</ul>
+<p>Tên không bị rò rỉ vượt ra khỏi package.
+Trong C, C++, Java tên y có thể gắn với bất cứ thứ gì.
+Trong Go, y (và cả Y) thì phải luôn được định nghĩa trong package.
+Trong Go, x.Y thì rõ ràng hơn: tìm x trong local, Y thì thuộc về x và chỉ có duy nhất một Y như vậy.</p>
+<p>Có hiệu quả tức thì cho tính dễ đọc.</p>
+<h3>1.5.5. Trở về với việc import</h3>
+<p>Importing một package có nghĩa là đọc một API được export từ package đó.
+Thông tin export này là tự chứa (self-contain). Ví dụ:</p>
+<ul>
+<li>A imports B</li>
+<li>B imports C</li>
+<li>Những export từ B chứa tham khảo đến C</li>
+</ul>
+<p>Những dữ liệu export của B chứa tất cả những thông tin cần thiết về C. Một compiler thì không cần thiết phải đọc dữ liệu export bởi C.</p>
+<p>Việc này có ảnh hưởng rất lớn đến thời gian build!</p>
+<h3>1.5.6. Dependence trong C</h3>
+<p>File .h thì không tự chứa.
+Như một kết quả, một compiler cần phải lặp lại việc đọc những file header cốt lõi.
+Sử dụng ifdef vẫn yêu cầu preprocessor phải đọc rất nhiều code.
+Hiển nhiên là việc này tốn rất nhiều thời gian…
+Đối với một hệ thống lớn như Google việc bùng nổ depedence là cấp số trở nên không thể tính toán được.
+Một bản build C++ của Google có thể đọc cùng một file header mười ngàn lần!!!</p>
+<h2>1.6. Tools (Công cụ)</h2>
+<h3>1.6.1. Giới thiệu</h3>
+<p>Hai compiler: gc, gccgo
+Hỗ trợ nhiều platform khác nhau: x86 (32/64bit), ARM (32bit), Linux, BSD, OS X, …
+Tự dộng format source code: gofmt
+Tự động extract document: godoc
+Tự động lấy API: gofix</p>
+<p>Tất cả (và còn hơn nữa)! dược tích hợp vào go command.</p>
+<h3>1.6.2. Build một chương trình Go</h3>
+<p>Một chương trình Go có thể dược biên dịch và linked mà không cần thêm bất kì thông tin gì như makefiles,…
+Theo quy định thì tất cả các file thuộc về một package sẽ nằm cùng trong thư mục.
+Tất cả các package phụ thuộc sẽ được tìm thấy bằng cách truy theo dường dẫn import ở package ngoài cùng (main packagee).
+Một tool đơn được tích hợp có thể đảm nhận việc build cho từng file hoặc cả hệ thống.</p>
+<h3>1.6.3. Câu lệnh trong Go</h3>
+<p>Cách sử dụng:</p>
+<pre class="hljs"><code>go <span class="hljs-built_in">command</span> [arguments]
+</code></pre>
+<p>Các lệnh có thể:</p>
+<pre class="hljs"><code>build       compile packages and dependencies
+clean       remove object files
+doc         run godoc on package sources
+fix         run go tool fix on packages
+fmt         run gofmt on package sources
+get         download and install packages and dependencies
+install     compile and install packages and dependencies
+list        list packages
+run         compile and run Go program
+<span class="hljs-built_in">test</span>        <span class="hljs-built_in">test</span> packages
+vet         run go tool vet on packages
+</code></pre>
+<p><a href="http://golang.org/cmd/go/">golang.org/cmd/go/</a></p>
+<h1>2. Object-oriented programming</h1>
+<h2>2.1. What is object-oriented programming?</h2>
+<blockquote>
+<p>Object-oriented programming (OOP) is a programming paradigm using objects – usually instances of a class – consisting of data fields and methods together with their interactions – to design applications and computer programs. Programming techniques may include features such as data abstraction, encapsulation, messaging, modularity, polymorphism, and inheritance. Many modern programming languages now support forms of OOP, at least as an option.</p>
+</blockquote>
+<p>(Wikipedia)</p>
+<h2>2.2. OOP chỉ yêu cầu thêm rất ít hỗ trợ từ phía ngôn ngữ lập trình</h2>
+<p>Chùng ta chỉ cần:</p>
+<ul>
+<li>Khái niệm về <em>Object</em></li>
+<li>Một cơ chế dể tương tác với chúng (<em>Methods</em>)</li>
+<li>Và hỗ trợ việc đa hình (<em>Interfaces</em>)</li>
+</ul>
+<p>Claim: Data abstraction, encapsulation, và modularity là những cơ chế độc lập với OOP và một ngôn ngữ hiện đại (OOP hoặc không) cũng đều nên hỗ trợ chúng một cách độc lập.</p>
+<h2>2.3. Lập trình hướng đối tượng trong Go</h2>
+<p>Có phương thức (methods) không có class</p>
+<p>Có interface không có phân chia cấp bậc (hierarchies)</p>
+<p>Sử dụng lại code mà không cần thừa kế (inheritance)</p>
+<p>Cụ thể:</p>
+<ul>
+<li>Bất cứ value nào cũng có thể là object</li>
+<li>Bất cứ type nào cũng có thể có vai trò là class</li>
+<li>Methods có thể đính kèm vào bất cứ type nào</li>
+<li>Interface hiện thực tính đa hình (polymorphism).</li>
+</ul>
+<h2>2.4. Methods</h2>
+<pre class="hljs"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span>
+
+<span class="hljs-keyword">type</span> Point <span class="hljs-keyword">struct</span>{ x, y <span class="hljs-keyword">int</span> }
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">PointToString</span><span class="hljs-params">(p Point)</span> <span class="hljs-title">string</span></span> {
+  <span class="hljs-keyword">return</span> fmt.Sprintf(<span class="hljs-string">"Point{%d, %d}"</span>, p.x, p.y)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p Point)</span> <span class="hljs-title">String</span><span class="hljs-params">()</span> <span class="hljs-title">string</span></span> {
+  <span class="hljs-keyword">return</span> fmt.Sprintf(<span class="hljs-string">"Point{%d, %d}"</span>, p.x, p.y)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+  p := Point{<span class="hljs-number">3</span>, <span class="hljs-number">5</span>}
+  fmt.Println(PointToString(p)) <span class="hljs-comment">// static dispatch</span>
+  fmt.Println(p.String())       <span class="hljs-comment">// static dispatch</span>
+  fmt.Println(p)
+}
+</code></pre>
+<p>Output:</p>
+<pre class="hljs"><code>Point{3, 5}
+Point{3, 5}
+Point{3, 5}
+</code></pre>
+<h2>2.5. Methods có thể được đính kèm vào bất cứ type nào</h2>
+<pre class="hljs"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span>
+
+<span class="hljs-keyword">type</span> Celsius <span class="hljs-keyword">float32</span>
+<span class="hljs-keyword">type</span> Fahrenheit <span class="hljs-keyword">float32</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(t Celsius)</span> <span class="hljs-title">String</span><span class="hljs-params">()</span> <span class="hljs-title">string</span></span>           { <span class="hljs-keyword">return</span> fmt.Sprintf(<span class="hljs-string">"%g°C"</span>, t) }
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(t Fahrenheit)</span> <span class="hljs-title">String</span><span class="hljs-params">()</span> <span class="hljs-title">string</span></span>        { <span class="hljs-keyword">return</span> fmt.Sprintf(<span class="hljs-string">"%g°F"</span>, t) }
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(t Celsius)</span> <span class="hljs-title">ToFahrenheit</span><span class="hljs-params">()</span> <span class="hljs-title">Fahrenheit</span></span> { <span class="hljs-keyword">return</span> Fahrenheit(t*<span class="hljs-number">9</span>/<span class="hljs-number">5</span> + <span class="hljs-number">32</span>) }
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-keyword">var</span> t Celsius = <span class="hljs-number">21</span>
+  fmt.Println(t.String())
+  fmt.Println(t)
+  fmt.Println(t.ToFahrenheit())
+}
+</code></pre>
+<h2>2.6. Interfaces</h2>
+<pre class="hljs"><code><span class="hljs-keyword">type</span> Stringer <span class="hljs-keyword">interface</span> {
+     String() <span class="hljs-keyword">string</span>
+}
+
+<span class="hljs-keyword">type</span> Reader <span class="hljs-keyword">interface</span> {
+     Read(p []<span class="hljs-keyword">byte</span>) (n <span class="hljs-keyword">int</span>, err error)
+}
+
+<span class="hljs-keyword">type</span> Writer <span class="hljs-keyword">interface</span> {
+     Write(p []<span class="hljs-keyword">byte</span>) (n <span class="hljs-keyword">int</span>, err error)
+}
+
+<span class="hljs-keyword">type</span> Empty <span class="hljs-keyword">interface</span>{}
+</code></pre>
+<p>Một interface định nghĩa một tập hợp các method
+Một type hiện thực tất cả các method của một interface được gọi là hiện thực interface.
+Tất cả các type hiện thực interface interface{}</p>
+<h2>2.7. Dispatch động</h2>
+<pre class="hljs"><code><span class="hljs-keyword">type</span> Stringer <span class="hljs-keyword">interface</span> {
+  String() <span class="hljs-keyword">string</span>
+}
+
+<span class="hljs-keyword">var</span> v Stringer
+<span class="hljs-keyword">var</span> corner = Point{<span class="hljs-number">1</span>, <span class="hljs-number">1</span>}
+<span class="hljs-keyword">var</span> boiling = Celsius(<span class="hljs-number">100</span>)
+
+v = corner
+fmt.Println(v.String()) <span class="hljs-comment">// dynamic dispatch</span>
+fmt.Println(v)
+
+v = boiling.ToFahrenheit()
+fmt.Println(v.String()) <span class="hljs-comment">// dynamic dispatch</span>
+fmt.Println(v)
+</code></pre>
+<p>Một giá trị (ở đây là corner, boiling) của một type (Point, Celcius) mà hiện thực một interface (Stringer) có thể được assign vào một biến (v) của type đó.</p>
+<h2>2.8. Composition và chaining</h2>
+<p>Thông thường interface có quy mô nhỏ (Tầm 1 -3 method).</p>
+<p>Việc sử dụng xen kẽ các interface chính trong thư viện chuẩn giúp dễ dàng xâu chuỗi (chain) các API lại với nhau.</p>
+<pre class="hljs"><code><span class="hljs-keyword">package</span> io <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Copy</span><span class="hljs-params">(dst Writer, src Reader)</span> <span class="hljs-params">(<span class="hljs-keyword">int64</span>, error)</span></span>
+</code></pre>
+<p>Function io.Copy copy bằng cách đọc từ bất cứ Reader nào và ghi vào bất cứ Writer nào.</p>
+<p>Interface thường được giới thiệu là tạm thời, và giống như trong thực tế.</p>
+<p>Không có hệ thống phân cấp rõ ràng và do dó cũng không cần design bất cứ hệ thống phân cấp nào.</p>
+<h2>2.9. Cat</h2>
+<pre class="hljs"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+	<span class="hljs-string">"flag"</span>
+	<span class="hljs-string">"io"</span>
+	<span class="hljs-string">"os"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+	flag.Parse()
+	<span class="hljs-keyword">for</span> _, arg := <span class="hljs-keyword">range</span> flag.Args() {
+		f, err := os.Open(arg)
+		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+			<span class="hljs-built_in">panic</span>(err)
+		}
+		<span class="hljs-keyword">defer</span> f.Close()
+		_, err = io.Copy(os.Stdout, f)
+		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+			<span class="hljs-built_in">panic</span>(err)
+		}
+	}
+}
+</code></pre>
+<h2>2.10. Interface trong thực hành</h2>
+<ul>
+<li>
+<p>Method ở bất cứ type nào và những interface tạm tạo thành 1 kiểu lập trình hướng đối tượng nhỏ gọn.</p>
+</li>
+<li>
+<p>Go interface tạo nên một trừu tượng hậu facto.</p>
+</li>
+<li>
+<p>Không có phân cấp kiểu rõ ràng</p>
+</li>
+<li>
+<p>Plug and play bằng cách type-safe</p>
+</li>
+</ul>
+<h1>3. Đồng bộ (concurrency)</h1>
+<h2>3.1. Đồng bộ là gì?</h2>
+<p>Đồng bộ là việc đóng gói những thực thi tính toán độc lập.</p>
+<p>Đồng bộ là cách để cấu trúc phần mềm, như là một cách đặc biệt để viết clean code tương tác tốt với thế giới thực.</p>
+<p>Đồng bộ thì không phải việc tính toán song song</p>
+<h2>3.2. Đồng bộ không phải là song song</h2>
+<p>Đồng bộ không phải là song song, mặc dù nó kích hoạt tính song song.</p>
+<p>Nếu bạn chỉ có một processor, chương trình của bạn vẫn có thể đồng bộ nhưng nó không thể song song được.</p>
+<p>Nói một cách khác, một chương trình đồng bộ tốt có thể chạy một cách hiệu quả trên multiprocessor. Đặc tính này thì quan trọng …</p>
+<p>Để thêm thông tin chi tiết, hãy tham khảo link dưới này.</p>
+<p><a href="http://golang.org/s/concurrency-is-not-parallelism">http://golang.org/s/concurrency-is-not-parallelism</a></p>
+<h2>3.3. Một model để xây dựng phần mềm</h2>
+<p>Dễ hiểu.</p>
+<p>Dễ dùng.</p>
+<p>Dễ nêu lý do.</p>
+<p>Bạn không cần phải là một chuyên gia!</p>
+<p>(Là dễ dàng hơn nhiều việc đối mặt với các loại xử lý song song (threads, semaphores, locks, barriers,…))</p>
+<p>Có một lịch sử dài đằng sau tính năng đồng bộ của Go, kể từ thời Hoare’s CSP năm 1978 và thậm chí là những câu lệnh đảm bảo của Dijkstra (1975).</p>
+<h2>3.4. Ví dụ đơn giản</h2>
+<h3>3.4.1. Một function đơn giản</h3>
+<p>Chúng ta cần một ví dụ để chỉ ra những đặc tính thú vị nổi bật của việc đồng bộ.</p>
+<p>Để tránh xao nhãng, chúng ta sẽ tạo ra một ví dụ đơn giản</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+  f(<span class="hljs-string">"Hello, World"</span>, <span class="hljs-number">500</span>*time.Millisecond)
+}
+</code></pre>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f</span><span class="hljs-params">(msg <span class="hljs-keyword">string</span>, delay time.Duration)</span></span> {
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; ; i++ {
+    fmt.Println(msg, i)
+    time.Sleep(delay)
+  }
+}
+</code></pre>
+<h3>3.4.2 Bỏ qua nó</h3>
+<p>Dòng lệnh go thực thi function như bình thường, nhưng không bắt caller phải đợi.</p>
+<p>Nó chạy một goroutine.</p>
+<p>Chức năng tương tự như là &amp; ở cuối một lệnh shell.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"three"</span>, <span class="hljs-number">300</span>*time.Millisecond)
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"six"</span>, <span class="hljs-number">600</span>*time.Millisecond)
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"nine"</span>, <span class="hljs-number">900</span>*time.Millisecond)
+}
+</code></pre>
+<h3>3.4.3. Bỏ qua nó bớt đi một ít</h3>
+<p>Khi hàm main return, chương trình kết thúc và function f kết thúc theo nó.</p>
+<p>Chúng ta có thể gặp nhau một ít, và nhân tiện chứng mình rằng cả main và goroutine được tạo ra đều đang chạy</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"three"</span>, <span class="hljs-number">300</span>*time.Millisecond)
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"six"</span>, <span class="hljs-number">600</span>*time.Millisecond)
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"nine"</span>, <span class="hljs-number">900</span>*time.Millisecond)
+  time.Sleep(<span class="hljs-number">3</span>*time.Second)
+  fmt.Println(<span class="hljs-string">"Done."</span>)
+}
+</code></pre>
+<h3>3.4.5. Goroutines</h3>
+<p>Goroutine là gì? Nó là một function thực thi độc lập, được khởi phát bởi một lệnh go.</p>
+<p>Nó có call stack riêng, sẽ thu giảm theo nhu cầu.</p>
+<p>Cheap. Trong thực tế sẽ có hàng ngàn, thậm chí hàng trăm ngàn goroutine.</p>
+<p>Không phải là thread.</p>
+<p>Có thể có chỉ một thread trong một chương trình với hàng ngàn goroutine.</p>
+<p>Thay vì như vậy, goroutine được phân luồng động thành các thread khi cần thiết để giữ tất cả goroutine hoạt động.</p>
+<p>Bạn có thể nghĩ goroutine gần giống như là một thread rất nhẹ (very cheap)</p>
+<h3>3.4.6. Channels</h3>
+<p>Một channel trong Go cung cấp một kết nối giữa hai goroutine, cho phép chung giao tiếp với nhau.</p>
+<pre class="hljs"><code><span class="hljs-comment">// Khai báo và khởi tạo</span>
+<span class="hljs-keyword">var</span> c <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span> c = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+<span class="hljs-comment">// hoặc</span>
+c := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+</code></pre>
+<pre class="hljs"><code><span class="hljs-comment">// Gửi đến một channel</span>
+c &lt;- <span class="hljs-number">1</span>
+</code></pre>
+<pre class="hljs"><code><span class="hljs-comment">// Nhận từ một channel</span>
+<span class="hljs-comment">// Dấu mũi tên ám chỉ hướng của dòng dữ liệu.</span>
+value = &lt;-c
+</code></pre>
+<h3>3.4.7. Sử dụng channel</h3>
+<p>Một channel sẽ kết nối hàm main và f goroutine để chúng có thể giao tiếp với nhau.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+  c := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">string</span>)
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"three"</span>, <span class="hljs-number">300</span>*time.Millisecond, c)
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ {
+    fmt.Println(<span class="hljs-string">"Received"</span>, &lt;-c) <span class="hljs-comment">// Lệnh Receive chỉ là một giá trị</span>
+  }
+  fmt.Println(<span class="hljs-string">"Done."</span>)
+}
+</code></pre>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f</span><span class="hljs-params">(msg <span class="hljs-keyword">string</span>, delay time.Duration, c <span class="hljs-keyword">chan</span> <span class="hljs-keyword">string</span>)</span></span> {
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; ; i++ {
+    c &lt;- fmt.Sprintf(<span class="hljs-string">"%s %d"</span>, msg, i) <span class="hljs-comment">// Bất cứ giá trị thích hợp nào có thể được gửi.</span>
+    time.Sleep(delay)
+  }
+}
+</code></pre>
+<h3>3.4.8. Đồng bộ</h3>
+<p>Khi function main thực thi &lt;-c, nó sẽ chờ một giá trị để được gửi.</p>
+<p>Tương tự, khi function f thực thi c&lt;-value, nó sẽ đợi một bên nhận sẵn sàng.</p>
+<p>Một bên gửi và bên nhận phải đều sẵn sàng thì mới có thể giao tiếp được. Ngược lại chúng ta phải đợi cho đến khi chúng sẵn sàng.</p>
+<p>Vì vậy các channel đều phải giao tiếp và đồng bộ.</p>
+<p>Channel có thể không buffer hoặc có buffer.</p>
+<h3>3.4.9. Sử dụng channel giữa nhiều goroutine</h3>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+  c := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">string</span>)
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"three"</span>, <span class="hljs-number">300</span>*time.Millisecond, c)
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"six"</span>, <span class="hljs-number">600</span>*time.Millisecond, c)
+  <span class="hljs-keyword">go</span> f(<span class="hljs-string">"nine"</span>, <span class="hljs-number">900</span>*time.Millisecond, c)
+
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ {
+    fmt.Println(<span class="hljs-string">"Received"</span>, &lt;-c)
+  }
+
+  fmt.Println(<span class="hljs-string">"Done."</span>)
+}
+</code></pre>
+<p>Một channel đơn có thể được dùng để giao tiếp giữa nhiều (không chỉ là hai) goroutine; nhiều goroutine có thể giao tiếp thông qua một hoặc nhiều channel.</p>
+<p>Điều này cho phép tạo ra sự đa dạng trong các cấu trúc đồng bộ (concurrency pattern).</p>
+<h3>3.4.10. Các yếu tố của một working-stealing scheduler</h3>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">worker</span><span class="hljs-params">(in <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, out <span class="hljs-keyword">chan</span> []<span class="hljs-keyword">int</span>)</span></span> {
+  <span class="hljs-keyword">for</span> {
+    order := &lt;-in <span class="hljs-comment">// Nhận một chỉ thị công việc.</span>
+    result := factor(order)
+  }
+}
+</code></pre>
+<p>Các worker sử dụng hai channel để giao tiếp:</p>
+<ul>
+<li>in channel đợi các tính toán về chỉ thị công việc</li>
+<li>out channel giao tiếp kết quả.</li>
+<li>Bởi vì cân bằng tải, một worker (một cách rất chậm) sẽ tính toán danh sách các ước chung của một chỉ thị cho sẵn.</li>
+</ul>
+<h3>3.4.11. Một matching giữa producer và consumer</h3>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">producer</span><span class="hljs-params">(out <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)</span></span> {
+  <span class="hljs-keyword">for</span> order := <span class="hljs-number">0</span>; ; order++ {
+    out &lt;- order <span class="hljs-comment">// Tạo ra một chỉ thị công việc.</span>
+  }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">consumer</span><span class="hljs-params">(in <span class="hljs-keyword">chan</span> []<span class="hljs-keyword">int</span>, n <span class="hljs-keyword">int</span>)</span></span> {
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; n; i++ {
+    result := &lt;-in <span class="hljs-comment">// Nhận một kết quả</span>
+    fmt.Println(<span class="hljs-string">"Consumed"</span>, result)
+  }
+}
+</code></pre>
+<p>Bên producer tạo ra và cung cấp không giới hạn chỉ thị công việc và gửi chúng ra ngoài.</p>
+<p>Bên consumer nhận n kết quả từ in channel và sau đó kết thúc.</p>
+<h3>3.4.12. Gộp tất cả chung với nhau</h3>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+  start := time.Now()
+  in := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)    <span class="hljs-comment">// Channel mà thứ tự công việc sẽ được nhận.</span>
+  out := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> []<span class="hljs-keyword">int</span>) <span class="hljs-comment">// Channel mà kết quả được trả về.</span>
+  <span class="hljs-keyword">go</span> producer(in)
+  <span class="hljs-keyword">go</span> worker(in, out)      <span class="hljs-comment">// Khởi phát một worker.</span>
+  consumer(out, <span class="hljs-number">100</span>)
+  fmt.Println(time.Since(start))
+}
+</code></pre>
+<p>Chúng ta sử dụng một worker đảm nhận tất cả công việc liên quan đến cân bằng tải (work load).</p>
+<p>Bởi vì chỉ có duy nhất một worker, chúng ta có thể thấy kết quả trả ngược về đúng thứ tự.</p>
+<p>Đoạn này chạy khá là chậm…</p>
+<h3>3.4.13. Sử dụng 10 worker</h3>
+<pre class="hljs"><code>in := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+out := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> []<span class="hljs-keyword">int</span>)
+<span class="hljs-keyword">go</span> producer(in) <span class="hljs-comment">// Khởi phát 10 workers.</span>
+
+<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ {
+  <span class="hljs-keyword">go</span> worker(in, out)
+}
+
+consumer(out, <span class="hljs-number">100</span>)
+</code></pre>
+<p>Một worker sẵn sàng sẽ đọc các chỉ thị tiếp theo từ channel in và bắt đầu làm việc từ đó.</p>
+<p>Một worker sẵn sàng sẽ tiến hành với các chỉ thị tiếp theo và cứ thế tiếp diễn.</p>
+<p>Bởi vì chúng ta có nhiều worker và vì vậy những chỉ thị khác nhau sẽ tốn thời gian khác nhau, chúng ta thấy kết quả trả về không đúng thứ tự nữa.</p>
+<p>Trong một hệ thống nhiều core, nhiều worker có thể chạy hoàn toàn song song với nhau.</p>
+<p>Đoạn mã này thì chạy nhanh hơn nhiều…</p>
+<h3>3.4.14. Cách tiếp cận của Go</h3>
+<p>Không giao tiếp bằng cách chia sẻ bộ nhớ, mà là chia sẻ bộ nhớ bằng  cách giao tiếp.</p>
+<h2>Links tham khảo</h2>
+<ul>
+<li>
+<p>Trang chủ Go</p>
+<p><a href="http://golang.org">golang.org</a></p>
+</li>
+<li>
+<p>Go Tour (học Go qua browser của bạn)</p>
+<p><a href="http://tour.golang.org">tour.golang.org</a></p>
+</li>
+<li>
+<p>Tài liệu về package:</p>
+<p><a href="http://golang.org/pkg">golang.org/pkg</a></p>
+</li>
+<li>
+<p>Các bài viết phong phú khác:</p>
+<p><a href="http://golang.org/doc">golang.org/doc</a></p>
+</li>
+</ul>
+</div></article></main><div class="layout_backToHome__3Z5L9"><a href="/">← Back to home</a></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postData":{"id":"go_for_c_programmers","contentHtml":"\u003ch1\u003e1. Giới thiệu về Go\u003c/h1\u003e\n\u003ch2\u003e1.1. Động lực\u003c/h2\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003eHiện tại đang có\u003c/th\u003e\n\u003cth style=\"text-align:center\"\u003eMuốn\u003c/th\u003e\n\u003cth style=\"text-align:right\"\u003eGolang\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003eCode khó hiểu và không an toàn\u003c/td\u003e\n\u003ctd style=\"text-align:center\"\u003eDễ đọc, code an toàn và hiệu quả\u003c/td\u003e\n\u003ctd style=\"text-align:right\"\u003eNhỏ gọn mà biểu diễn tốt\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eBuild code siêu chậm\u003c/td\u003e\n\u003ctd style=\"text-align:center\"\u003eMột hệ thống có thể mở rộng (scale)\u003c/td\u003e\n\u003ctd style=\"text-align:right\"\u003eKiểu dữ liệu tĩnh (statically) và có hỗ trợ thu dọn rác (garbage collected)\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eKhông có hỗ trợ lập trình đồng bộ\u003c/td\u003e\n\u003ctd style=\"text-align:center\"\u003eHỗ trợ lập trình đồng bộ tốt\u003c/td\u003e\n\u003ctd style=\"text-align:right\"\u003eĐối tượng nhưng không định hướng kiểu (type - oriented)\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eTools cũ kĩ\u003c/td\u003e\n\u003ctd style=\"text-align:center\"\u003eNhững Tools mà có thể hoạt động tại những hệ thống lớn như Google\u003c/td\u003e\n\u003ctd style=\"text-align:right\"\u003eHỗ trợ lập trình đồng bộ tốt\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003ctd style=\"text-align:center\"\u003e\u003c/td\u003e\n\u003ctd style=\"text-align:right\"\u003eHiện thực hiệu quả\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003ctd style=\"text-align:center\"\u003e\u003c/td\u003e\n\u003ctd style=\"text-align:right\"\u003eThư viện chuẩn phong phú\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003ctd style=\"text-align:center\"\u003e\u003c/td\u003e\n\u003ctd style=\"text-align:right\"\u003eBiên dịch nhanh\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003c/td\u003e\n\u003ctd style=\"text-align:center\"\u003e\u003c/td\u003e\n\u003ctd style=\"text-align:right\"\u003eTools có thể mở rộng được\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003ch2\u003e1.2. Hello World\u003c/h2\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003epackage\u003c/span\u003e main\n\n\u003cspan class=\"hljs-keyword\"\u003eimport\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"fmt\"\u003c/span\u003e\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n  fmt.Println(\u003cspan class=\"hljs-string\"\u003e\"Hello, 世界!\"\u003c/span\u003e)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e1.3. Syntax\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003eSyntax is not important… - unless you are a programmer.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eRob Pike.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eThe readability of programs is immeasurably more important than their writeability.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eHints on Programming Language Design\u003c/p\u003e\n\u003cp\u003eC. A. R. Hoare 1973\u003c/p\u003e\n\u003ch3\u003e1.3.1. Quá dài dòng\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003escoped_ptr\u0026lt;logStats::LogStats\u0026gt;\n    \u003cspan class=\"hljs-title\"\u003elogStats\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(logStats::LogStats::NewLogStats(FLAGS_logStats,logStats::LogStats::kFIFO))\u003c/span\u003e\u003c/span\u003e;\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e1.3.2. Quá dày đặc\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e(n: \u003cspan class=\"hljs-type\"\u003eInt\u003c/span\u003e) =\u0026gt; (\u003cspan class=\"hljs-number\"\u003e2\u003c/span\u003e to n) |\u0026gt; (r =\u0026gt; r.foldLeft(r.toSet)((ps, x) =\u0026gt;\n    \u003cspan class=\"hljs-keyword\"\u003eif\u003c/span\u003e (ps(x)) ps \u003cspan class=\"hljs-comment\"\u003e-- (x * x to n by x) else ps))\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e1.3.3. Chuẩn\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003et := time.Now()\n\u003cspan class=\"hljs-keyword\"\u003eswitch\u003c/span\u003e {\n\u003cspan class=\"hljs-keyword\"\u003ecase\u003c/span\u003e t.Hour() \u0026lt; \u003cspan class=\"hljs-number\"\u003e12\u003c/span\u003e:\n    \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"morning\"\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003ecase\u003c/span\u003e t.Hour() \u0026lt; \u003cspan class=\"hljs-number\"\u003e18\u003c/span\u003e:\n    \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"afternoon\"\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003edefault\u003c/span\u003e:\n    \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"evening\"\u003c/span\u003e\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e1.4. Đọc code Go\u003c/h2\u003e\n\u003ch3\u003e1.4.1. Packages\u003c/h3\u003e\n\u003cp\u003eMột chương trình Go sẽ bao gồm các packages.\nMột packages sẽ bao gồm 1 hoặc nhiều files mã nguồn (go files).\nMột file mã nguồn sẽ bắt đầu với lệnh package như khai báo dưới này:\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003epackage\u003c/span\u003e main\n\n\u003cspan class=\"hljs-keyword\"\u003eimport\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"fmt\"\u003c/span\u003e\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n    fmt.Println(\u003cspan class=\"hljs-string\"\u003e\"Hello, 世界!\"\u003c/span\u003e)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eTheo quy ước thì tất cả các file thuộc về một package sẽ nằm chung một thư mục.\u003c/p\u003e\n\u003ch3\u003e1.4.2. Khai báo, sử dụng Pascal-style (từ trái sang phải)\u003c/h3\u003e\n\u003cp\u003ePattern: \u0026lt;keyword\u0026gt; \u0026lt;tên\u0026gt; [kiểu dữ liệu][khởi tạo]\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003eimport\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"fmt\"\u003c/span\u003e\n\n\u003cspan class=\"hljs-keyword\"\u003econst\u003c/span\u003e digits = \u003cspan class=\"hljs-string\"\u003e\"0123456789abcdef\"\u003c/span\u003e\n\n\u003cspan class=\"hljs-keyword\"\u003etype\u003c/span\u003e Point \u003cspan class=\"hljs-keyword\"\u003estruct\u003c/span\u003e {\n    x, y \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e\n    tag  \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e\n}\n\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e s [\u003cspan class=\"hljs-number\"\u003e32\u003c/span\u003e]\u003cspan class=\"hljs-keyword\"\u003ebyte\u003c/span\u003e\n\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e msgs = []\u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e{\u003cspan class=\"hljs-string\"\u003e\"Hello, 世界\"\u003c/span\u003e, \u003cspan class=\"hljs-string\"\u003e\"Ciao, Mondo\"\u003c/span\u003e}\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eitoa\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(x, base \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003estring\u003c/span\u003e\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e1.4.3. Why?\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003ep, q *Point\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eadder\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(delta \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003efunc\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(x \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eint\u003c/span\u003e\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e1.4.4. Constants (Hằng số)\u003c/h3\u003e\n\u003cp\u003eTrong Go, constants thì chính xác về mặt toán học\nKhông cần thiết phải có hậu tố phía sau (như là -42LL, 7UL,…)\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003econst\u003c/span\u003e (\n    MaxUInt = \u003cspan class=\"hljs-number\"\u003e1\u003c/span\u003e\u0026lt;\u0026lt;\u003cspan class=\"hljs-number\"\u003e64\u003c/span\u003e - \u003cspan class=\"hljs-number\"\u003e1\u003c/span\u003e\n    Pi      = \u003cspan class=\"hljs-number\"\u003e3.14159265358979323846264338327950288419716939937510582097494459\u003c/span\u003e\n    Pi2     = Pi * Pi\n    Delta   = \u003cspan class=\"hljs-number\"\u003e2.0\u003c/span\u003e\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eChỉ khi được sử dụng constant mới được cắt ngắn theo kích thước.\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e    \u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e x \u003cspan class=\"hljs-keyword\"\u003euint64\u003c/span\u003e = MaxUInt\n    \u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e pi2 \u003cspan class=\"hljs-keyword\"\u003efloat32\u003c/span\u003e = Pi2\n    \u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e delta \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e = Delta\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eLợi thế lớn là ở tính dễ đọc và dễ sử dụng\u003c/p\u003e\n\u003ch3\u003e1.4.5. Types (Kiểu)\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003ePhần quen thuộc:\n\u003cul\u003e\n\u003cli\u003eKiểu cơ bản, arrays, structs, pointers, functions.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eTuy nhiên:\n\u003cul\u003e\n\u003cli\u003estring là kiểu cơ bản\u003c/li\u003e\n\u003cli\u003eKhông có tự động chuyển đổi kiểu cơ bản trong dòng lệnh.\u003c/li\u003e\n\u003cli\u003eKhông có tính toán pointer (con trỏ), pointer và array là khác nhau.\u003c/li\u003e\n\u003cli\u003eMột kiểu function sẽ đại diện cho 1 function; context và tất cả\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eMới:\n\u003cul\u003e\n\u003cli\u003eSlices thay vì array pointer + độ dài khác nhau: []int\u003c/li\u003e\n\u003cli\u003eMaps bởi vì mọi người đều cần nó: map[string]int\u003c/li\u003e\n\u003cli\u003eInterfaces được dùng cho việc đa hình (polymorphism): interface {}\u003c/li\u003e\n\u003cli\u003eChannels để giao tiếp giữa các goroutines: chan int\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e1.4.6. Biến\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003ePhần quen thuộc:\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e i \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e p, q *Point\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e threshold \u003cspan class=\"hljs-keyword\"\u003efloat64\u003c/span\u003e = \u003cspan class=\"hljs-number\"\u003e0.75\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003eMới: Kiểu có thể được diễn giải từ cách khởi tạo\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e i = \u003cspan class=\"hljs-number\"\u003e42\u003c/span\u003e       \u003cspan class=\"hljs-comment\"\u003e// type của i là int\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e z = \u003cspan class=\"hljs-number\"\u003e1\u003c/span\u003e + \u003cspan class=\"hljs-number\"\u003e2.3i\u003c/span\u003e \u003cspan class=\"hljs-comment\"\u003e// type của z là complex128\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003eShortcut (bên trong functions):\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003ei := \u003cspan class=\"hljs-number\"\u003e42\u003c/span\u003e \u003cspan class=\"hljs-comment\"\u003e// type của i là int\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003eThao tác lấy địa chỉ của bất kì biến nào là an toàn:\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e \u0026amp;i\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e1.4.7. Functions\u003c/h3\u003e\n\u003cp\u003eFunction có thể trả về nhiều giá trị:\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eatoi\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(s \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e)\u003c/span\u003e \u003cspan class=\"hljs-params\"\u003e(i \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e, err error)\u003c/span\u003e\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eClosures\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eaddler\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(delta \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003efunc\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(x \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eint\u003c/span\u003e\u003c/span\u003e {\n  f := \u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-params\"\u003e(x \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eint\u003c/span\u003e\u003c/span\u003e {\n    \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e x + delta;\n  }\n  \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e f\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e inc = addler(\u003cspan class=\"hljs-number\"\u003e1\u003c/span\u003e)\nfmt.Println(inc(\u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e))\nfmt.Println(addler(\u003cspan class=\"hljs-number\"\u003e-1\u003c/span\u003e)(\u003cspan class=\"hljs-number\"\u003e10\u003c/span\u003e))\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e1.4.8. Statments (Câu lệnh)\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003et := x;\n\u003cspan class=\"hljs-keyword\"\u003eswitch\u003c/span\u003e {\n\u003cspan class=\"hljs-keyword\"\u003ecase\u003c/span\u003e x == \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e:\n  \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"0\"\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003ecase\u003c/span\u003e x \u0026lt; \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e:\n  t = -x\n}\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e s [\u003cspan class=\"hljs-number\"\u003e32\u003c/span\u003e]\u003cspan class=\"hljs-keyword\"\u003ebyte\u003c/span\u003e\ni := \u003cspan class=\"hljs-built_in\"\u003elen\u003c/span\u003e(s)\n\u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e t != \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e {\n  i--\n  s[i] = digits[t%base]\n  t /= base\n}\n\u003cspan class=\"hljs-keyword\"\u003eif\u003c/span\u003e x \u0026lt; \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e {\n  i--\n  s[i] = \u003cspan class=\"hljs-string\"\u003e'-'\u003c/span\u003e\n}\n\u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e(s[i:])\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e1.4.9. Statement của Go dành cho người lập trình C\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eLàm rõ ràng hơn:\n\u003cul\u003e\n\u003cli\u003eKhông có dấu chấm phẩy\u003c/li\u003e\n\u003cli\u003eGán nhiều giá trị\u003c/li\u003e\n\u003cli\u003e++ và – cũng là câu lệnh\u003c/li\u003e\n\u003cli\u003eKhông có dấu mở đóng ngoặc ở điều kiện, dấu mở đóng ngoặc nhọn là bắt buộc\u003c/li\u003e\n\u003cli\u003eBreak được ngầm hiểu trong switch, làm rõ ràng việc fallthrough\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eMới:\n\u003cul\u003e\n\u003cli\u003efor range\u003c/li\u003e\n\u003cli\u003etype switch\u003c/li\u003e\n\u003cli\u003ego, select\u003c/li\u003e\n\u003cli\u003edefer\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e1.4.10. Assignment (Gán giá trị)\u003c/h3\u003e\n\u003cp\u003eCó thể gán nhiều giá trị đồng thời\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003ea, b  = x, y\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eBằng với\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003et1 := x\nt2 := y\na = t1\nb = t2\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eVí dụ\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003ea, b = b, a       \u003cspan class=\"hljs-comment\"\u003e// swap a and b\u003c/span\u003e\ni, err = atoi(s)  \u003cspan class=\"hljs-comment\"\u003e// assign results of atoi\u003c/span\u003e\ni, _ = atoi(\u003cspan class=\"hljs-number\"\u003e991\u003c/span\u003e)  \u003cspan class=\"hljs-comment\"\u003e// discard 2nd value\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e1.4.11. Switch statements\u003c/h3\u003e\n\u003cp\u003eSwitch statement có thể có nhiều case và break được hiểu ngầm\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003eswitch\u003c/span\u003e {\n\u003cspan class=\"hljs-keyword\"\u003ecase\u003c/span\u003e \u003cspan class=\"hljs-number\"\u003e1\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e2\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e3\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e4\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e5\u003c/span\u003e:\n  tag = \u003cspan class=\"hljs-string\"\u003e\"workday\"\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003ecase\u003c/span\u003e \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e6\u003c/span\u003e:\n  tag = \u003cspan class=\"hljs-string\"\u003e\"weekend\"\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003edefault\u003c/span\u003e:\n  tag = \u003cspan class=\"hljs-string\"\u003e\"invalid\"\u003c/span\u003e\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eGiá trị trong case thì không bắt buộc phải là constanst\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003eswitch\u003c/span\u003e {\n\u003cspan class=\"hljs-keyword\"\u003ecase\u003c/span\u003e day \u0026lt; \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e || day \u0026gt; \u003cspan class=\"hljs-number\"\u003e6\u003c/span\u003e:\n  tag = \u003cspan class=\"hljs-string\"\u003e\"invalid\"\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003ecase\u003c/span\u003e day == \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e || day == \u003cspan class=\"hljs-number\"\u003e6\u003c/span\u003e:\n  tag = \u003cspan class=\"hljs-string\"\u003e\"weekend\"\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003edefault\u003c/span\u003e:\n  tag = \u003cspan class=\"hljs-string\"\u003e\"workday\"\u003c/span\u003e\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e1.4.12. Vòng lặp for\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e i := \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e; i \u0026lt; \u003cspan class=\"hljs-built_in\"\u003elen\u003c/span\u003e(primes); i++ {\n  fmt.Println(i, primes[i])\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eMệnh đề range cho phép duyệt qua array và slice dễ dàng\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e i, x := \u003cspan class=\"hljs-keyword\"\u003erange\u003c/span\u003e primes {\n  fmt.Println(i, x)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eNhững giá trị không sử dụng được bỏ qua bằng cách gán vào định danh (identifier) _\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e sum \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e _, x := \u003cspan class=\"hljs-keyword\"\u003erange\u003c/span\u003e primes {\n  sum += x\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e1.5. Dependencies (Phụ thuộc)\u003c/h2\u003e\n\u003ch3\u003e1.5.1. Dependence trong Go\u003c/h3\u003e\n\u003cp\u003eMột khai báo import được dùng để mô tả một dependency trong một package khác:\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003eimport\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"net/rpc\"\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eỞ đây importing package phụ thuộc vào Go package “rpc”\u003c/p\u003e\n\u003cp\u003eĐường dẫn import (“net/rpc”) xác định duy nhất một package; nhiều packages có thể có cùng tên, nhưng chúng lại có thể nằm ở những vị trí khác nhau (thư mục)\u003c/p\u003e\n\u003cp\u003eQuy định thì tên của package sẽ là phần tử cuối cùng của đường dẫn import (ở đây là “rpc”)\u003c/p\u003e\n\u003cp\u003eChức năng export của package rpc thì sẵn có ở trong package qualifier (rpc):\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003erpc.Call\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eMột khai báo import trong Go có vai trò giống như include trong C.\u003c/p\u003e\n\u003ch3\u003e1.5.2. Dạo quanh một vòng với cách đặt tên trong Go\u003c/h3\u003e\n\u003cp\u003eCách mà tên hoạt động thì có ảnh hưởng quan trọng đến tính dễ đọc.\u003c/p\u003e\n\u003cp\u003eScope thì quyết định cách thức hoạt động của tên.\u003c/p\u003e\n\u003cp\u003eGo có một cấu trúc scope tương đối đơn giản:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003euniverse\u003c/li\u003e\n\u003cli\u003epackage\u003c/li\u003e\n\u003cli\u003efile (chỉ được dùng cho việc import)\u003c/li\u003e\n\u003cli\u003efunction\u003c/li\u003e\n\u003cli\u003eblock\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e1.5.3. Tính cục bộ của tên (TODO)\u003c/h3\u003e\n\u003cp\u003eTên viết hoa sẽ được exported: Name vs name\u003c/p\u003e\n\u003cp\u003ePackage qualifier luôn đại diện cho tên được import\u003c/p\u003e\n\u003cp\u003eComponent đầu tiên của mọi tên luôn được khai báo trong package hiện tại\u003c/p\u003e\n\u003cp\u003eĐây là 1 trong những quyết định đúng đắn và khó khăn nhất trong Go\u003c/p\u003e\n\u003ch3\u003e1.5.4. Mở rộng cục bộ (Locality scales)\u003c/h3\u003e\n\u003cp\u003eKhông có bất ngờ khi import\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eViệc export thêm 1 tên sẽ không phá vỡ package của tôi.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eTên không bị rò rỉ vượt ra khỏi package.\nTrong C, C++, Java tên y có thể gắn với bất cứ thứ gì.\nTrong Go, y (và cả Y) thì phải luôn được định nghĩa trong package.\nTrong Go, x.Y thì rõ ràng hơn: tìm x trong local, Y thì thuộc về x và chỉ có duy nhất một Y như vậy.\u003c/p\u003e\n\u003cp\u003eCó hiệu quả tức thì cho tính dễ đọc.\u003c/p\u003e\n\u003ch3\u003e1.5.5. Trở về với việc import\u003c/h3\u003e\n\u003cp\u003eImporting một package có nghĩa là đọc một API được export từ package đó.\nThông tin export này là tự chứa (self-contain). Ví dụ:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eA imports B\u003c/li\u003e\n\u003cli\u003eB imports C\u003c/li\u003e\n\u003cli\u003eNhững export từ B chứa tham khảo đến C\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eNhững dữ liệu export của B chứa tất cả những thông tin cần thiết về C. Một compiler thì không cần thiết phải đọc dữ liệu export bởi C.\u003c/p\u003e\n\u003cp\u003eViệc này có ảnh hưởng rất lớn đến thời gian build!\u003c/p\u003e\n\u003ch3\u003e1.5.6. Dependence trong C\u003c/h3\u003e\n\u003cp\u003eFile .h thì không tự chứa.\nNhư một kết quả, một compiler cần phải lặp lại việc đọc những file header cốt lõi.\nSử dụng ifdef vẫn yêu cầu preprocessor phải đọc rất nhiều code.\nHiển nhiên là việc này tốn rất nhiều thời gian…\nĐối với một hệ thống lớn như Google việc bùng nổ depedence là cấp số trở nên không thể tính toán được.\nMột bản build C++ của Google có thể đọc cùng một file header mười ngàn lần!!!\u003c/p\u003e\n\u003ch2\u003e1.6. Tools (Công cụ)\u003c/h2\u003e\n\u003ch3\u003e1.6.1. Giới thiệu\u003c/h3\u003e\n\u003cp\u003eHai compiler: gc, gccgo\nHỗ trợ nhiều platform khác nhau: x86 (32/64bit), ARM (32bit), Linux, BSD, OS X, …\nTự dộng format source code: gofmt\nTự động extract document: godoc\nTự động lấy API: gofix\u003c/p\u003e\n\u003cp\u003eTất cả (và còn hơn nữa)! dược tích hợp vào go command.\u003c/p\u003e\n\u003ch3\u003e1.6.2. Build một chương trình Go\u003c/h3\u003e\n\u003cp\u003eMột chương trình Go có thể dược biên dịch và linked mà không cần thêm bất kì thông tin gì như makefiles,…\nTheo quy định thì tất cả các file thuộc về một package sẽ nằm cùng trong thư mục.\nTất cả các package phụ thuộc sẽ được tìm thấy bằng cách truy theo dường dẫn import ở package ngoài cùng (main packagee).\nMột tool đơn được tích hợp có thể đảm nhận việc build cho từng file hoặc cả hệ thống.\u003c/p\u003e\n\u003ch3\u003e1.6.3. Câu lệnh trong Go\u003c/h3\u003e\n\u003cp\u003eCách sử dụng:\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003ego \u003cspan class=\"hljs-built_in\"\u003ecommand\u003c/span\u003e [arguments]\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eCác lệnh có thể:\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003ebuild       compile packages and dependencies\nclean       remove object files\ndoc         run godoc on package sources\nfix         run go tool fix on packages\nfmt         run gofmt on package sources\nget         download and install packages and dependencies\ninstall     compile and install packages and dependencies\nlist        list packages\nrun         compile and run Go program\n\u003cspan class=\"hljs-built_in\"\u003etest\u003c/span\u003e        \u003cspan class=\"hljs-built_in\"\u003etest\u003c/span\u003e packages\nvet         run go tool vet on packages\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca href=\"http://golang.org/cmd/go/\"\u003egolang.org/cmd/go/\u003c/a\u003e\u003c/p\u003e\n\u003ch1\u003e2. Object-oriented programming\u003c/h1\u003e\n\u003ch2\u003e2.1. What is object-oriented programming?\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003eObject-oriented programming (OOP) is a programming paradigm using objects – usually instances of a class – consisting of data fields and methods together with their interactions – to design applications and computer programs. Programming techniques may include features such as data abstraction, encapsulation, messaging, modularity, polymorphism, and inheritance. Many modern programming languages now support forms of OOP, at least as an option.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e(Wikipedia)\u003c/p\u003e\n\u003ch2\u003e2.2. OOP chỉ yêu cầu thêm rất ít hỗ trợ từ phía ngôn ngữ lập trình\u003c/h2\u003e\n\u003cp\u003eChùng ta chỉ cần:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eKhái niệm về \u003cem\u003eObject\u003c/em\u003e\u003c/li\u003e\n\u003cli\u003eMột cơ chế dể tương tác với chúng (\u003cem\u003eMethods\u003c/em\u003e)\u003c/li\u003e\n\u003cli\u003eVà hỗ trợ việc đa hình (\u003cem\u003eInterfaces\u003c/em\u003e)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eClaim: Data abstraction, encapsulation, và modularity là những cơ chế độc lập với OOP và một ngôn ngữ hiện đại (OOP hoặc không) cũng đều nên hỗ trợ chúng một cách độc lập.\u003c/p\u003e\n\u003ch2\u003e2.3. Lập trình hướng đối tượng trong Go\u003c/h2\u003e\n\u003cp\u003eCó phương thức (methods) không có class\u003c/p\u003e\n\u003cp\u003eCó interface không có phân chia cấp bậc (hierarchies)\u003c/p\u003e\n\u003cp\u003eSử dụng lại code mà không cần thừa kế (inheritance)\u003c/p\u003e\n\u003cp\u003eCụ thể:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eBất cứ value nào cũng có thể là object\u003c/li\u003e\n\u003cli\u003eBất cứ type nào cũng có thể có vai trò là class\u003c/li\u003e\n\u003cli\u003eMethods có thể đính kèm vào bất cứ type nào\u003c/li\u003e\n\u003cli\u003eInterface hiện thực tính đa hình (polymorphism).\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003e2.4. Methods\u003c/h2\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003epackage\u003c/span\u003e main\n\n\u003cspan class=\"hljs-keyword\"\u003eimport\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"fmt\"\u003c/span\u003e\n\n\u003cspan class=\"hljs-keyword\"\u003etype\u003c/span\u003e Point \u003cspan class=\"hljs-keyword\"\u003estruct\u003c/span\u003e{ x, y \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e }\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003ePointToString\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(p Point)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003estring\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e fmt.Sprintf(\u003cspan class=\"hljs-string\"\u003e\"Point{%d, %d}\"\u003c/span\u003e, p.x, p.y)\n}\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-params\"\u003e(p Point)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eString\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003estring\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e fmt.Sprintf(\u003cspan class=\"hljs-string\"\u003e\"Point{%d, %d}\"\u003c/span\u003e, p.x, p.y)\n}\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n  p := Point{\u003cspan class=\"hljs-number\"\u003e3\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e5\u003c/span\u003e}\n  fmt.Println(PointToString(p)) \u003cspan class=\"hljs-comment\"\u003e// static dispatch\u003c/span\u003e\n  fmt.Println(p.String())       \u003cspan class=\"hljs-comment\"\u003e// static dispatch\u003c/span\u003e\n  fmt.Println(p)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eOutput:\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003ePoint{3, 5}\nPoint{3, 5}\nPoint{3, 5}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e2.5. Methods có thể được đính kèm vào bất cứ type nào\u003c/h2\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003epackage\u003c/span\u003e main\n\n\u003cspan class=\"hljs-keyword\"\u003eimport\u003c/span\u003e \u003cspan class=\"hljs-string\"\u003e\"fmt\"\u003c/span\u003e\n\n\u003cspan class=\"hljs-keyword\"\u003etype\u003c/span\u003e Celsius \u003cspan class=\"hljs-keyword\"\u003efloat32\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003etype\u003c/span\u003e Fahrenheit \u003cspan class=\"hljs-keyword\"\u003efloat32\u003c/span\u003e\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-params\"\u003e(t Celsius)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eString\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003estring\u003c/span\u003e\u003c/span\u003e           { \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e fmt.Sprintf(\u003cspan class=\"hljs-string\"\u003e\"%g°C\"\u003c/span\u003e, t) }\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-params\"\u003e(t Fahrenheit)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eString\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003estring\u003c/span\u003e\u003c/span\u003e        { \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e fmt.Sprintf(\u003cspan class=\"hljs-string\"\u003e\"%g°F\"\u003c/span\u003e, t) }\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-params\"\u003e(t Celsius)\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eToFahrenheit\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eFahrenheit\u003c/span\u003e\u003c/span\u003e { \u003cspan class=\"hljs-keyword\"\u003ereturn\u003c/span\u003e Fahrenheit(t*\u003cspan class=\"hljs-number\"\u003e9\u003c/span\u003e/\u003cspan class=\"hljs-number\"\u003e5\u003c/span\u003e + \u003cspan class=\"hljs-number\"\u003e32\u003c/span\u003e) }\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e t Celsius = \u003cspan class=\"hljs-number\"\u003e21\u003c/span\u003e\n  fmt.Println(t.String())\n  fmt.Println(t)\n  fmt.Println(t.ToFahrenheit())\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e2.6. Interfaces\u003c/h2\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003etype\u003c/span\u003e Stringer \u003cspan class=\"hljs-keyword\"\u003einterface\u003c/span\u003e {\n     String() \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e\n}\n\n\u003cspan class=\"hljs-keyword\"\u003etype\u003c/span\u003e Reader \u003cspan class=\"hljs-keyword\"\u003einterface\u003c/span\u003e {\n     Read(p []\u003cspan class=\"hljs-keyword\"\u003ebyte\u003c/span\u003e) (n \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e, err error)\n}\n\n\u003cspan class=\"hljs-keyword\"\u003etype\u003c/span\u003e Writer \u003cspan class=\"hljs-keyword\"\u003einterface\u003c/span\u003e {\n     Write(p []\u003cspan class=\"hljs-keyword\"\u003ebyte\u003c/span\u003e) (n \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e, err error)\n}\n\n\u003cspan class=\"hljs-keyword\"\u003etype\u003c/span\u003e Empty \u003cspan class=\"hljs-keyword\"\u003einterface\u003c/span\u003e{}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eMột interface định nghĩa một tập hợp các method\nMột type hiện thực tất cả các method của một interface được gọi là hiện thực interface.\nTất cả các type hiện thực interface interface{}\u003c/p\u003e\n\u003ch2\u003e2.7. Dispatch động\u003c/h2\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003etype\u003c/span\u003e Stringer \u003cspan class=\"hljs-keyword\"\u003einterface\u003c/span\u003e {\n  String() \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e\n}\n\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e v Stringer\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e corner = Point{\u003cspan class=\"hljs-number\"\u003e1\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e1\u003c/span\u003e}\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e boiling = Celsius(\u003cspan class=\"hljs-number\"\u003e100\u003c/span\u003e)\n\nv = corner\nfmt.Println(v.String()) \u003cspan class=\"hljs-comment\"\u003e// dynamic dispatch\u003c/span\u003e\nfmt.Println(v)\n\nv = boiling.ToFahrenheit()\nfmt.Println(v.String()) \u003cspan class=\"hljs-comment\"\u003e// dynamic dispatch\u003c/span\u003e\nfmt.Println(v)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eMột giá trị (ở đây là corner, boiling) của một type (Point, Celcius) mà hiện thực một interface (Stringer) có thể được assign vào một biến (v) của type đó.\u003c/p\u003e\n\u003ch2\u003e2.8. Composition và chaining\u003c/h2\u003e\n\u003cp\u003eThông thường interface có quy mô nhỏ (Tầm 1 -3 method).\u003c/p\u003e\n\u003cp\u003eViệc sử dụng xen kẽ các interface chính trong thư viện chuẩn giúp dễ dàng xâu chuỗi (chain) các API lại với nhau.\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003epackage\u003c/span\u003e io \u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eCopy\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(dst Writer, src Reader)\u003c/span\u003e \u003cspan class=\"hljs-params\"\u003e(\u003cspan class=\"hljs-keyword\"\u003eint64\u003c/span\u003e, error)\u003c/span\u003e\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eFunction io.Copy copy bằng cách đọc từ bất cứ Reader nào và ghi vào bất cứ Writer nào.\u003c/p\u003e\n\u003cp\u003eInterface thường được giới thiệu là tạm thời, và giống như trong thực tế.\u003c/p\u003e\n\u003cp\u003eKhông có hệ thống phân cấp rõ ràng và do dó cũng không cần design bất cứ hệ thống phân cấp nào.\u003c/p\u003e\n\u003ch2\u003e2.9. Cat\u003c/h2\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-keyword\"\u003epackage\u003c/span\u003e main\n\n\u003cspan class=\"hljs-keyword\"\u003eimport\u003c/span\u003e (\n\t\u003cspan class=\"hljs-string\"\u003e\"flag\"\u003c/span\u003e\n\t\u003cspan class=\"hljs-string\"\u003e\"io\"\u003c/span\u003e\n\t\u003cspan class=\"hljs-string\"\u003e\"os\"\u003c/span\u003e\n)\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n\tflag.Parse()\n\t\u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e _, arg := \u003cspan class=\"hljs-keyword\"\u003erange\u003c/span\u003e flag.Args() {\n\t\tf, err := os.Open(arg)\n\t\t\u003cspan class=\"hljs-keyword\"\u003eif\u003c/span\u003e err != \u003cspan class=\"hljs-literal\"\u003enil\u003c/span\u003e {\n\t\t\t\u003cspan class=\"hljs-built_in\"\u003epanic\u003c/span\u003e(err)\n\t\t}\n\t\t\u003cspan class=\"hljs-keyword\"\u003edefer\u003c/span\u003e f.Close()\n\t\t_, err = io.Copy(os.Stdout, f)\n\t\t\u003cspan class=\"hljs-keyword\"\u003eif\u003c/span\u003e err != \u003cspan class=\"hljs-literal\"\u003enil\u003c/span\u003e {\n\t\t\t\u003cspan class=\"hljs-built_in\"\u003epanic\u003c/span\u003e(err)\n\t\t}\n\t}\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003e2.10. Interface trong thực hành\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003eMethod ở bất cứ type nào và những interface tạm tạo thành 1 kiểu lập trình hướng đối tượng nhỏ gọn.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eGo interface tạo nên một trừu tượng hậu facto.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eKhông có phân cấp kiểu rõ ràng\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003ePlug and play bằng cách type-safe\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch1\u003e3. Đồng bộ (concurrency)\u003c/h1\u003e\n\u003ch2\u003e3.1. Đồng bộ là gì?\u003c/h2\u003e\n\u003cp\u003eĐồng bộ là việc đóng gói những thực thi tính toán độc lập.\u003c/p\u003e\n\u003cp\u003eĐồng bộ là cách để cấu trúc phần mềm, như là một cách đặc biệt để viết clean code tương tác tốt với thế giới thực.\u003c/p\u003e\n\u003cp\u003eĐồng bộ thì không phải việc tính toán song song\u003c/p\u003e\n\u003ch2\u003e3.2. Đồng bộ không phải là song song\u003c/h2\u003e\n\u003cp\u003eĐồng bộ không phải là song song, mặc dù nó kích hoạt tính song song.\u003c/p\u003e\n\u003cp\u003eNếu bạn chỉ có một processor, chương trình của bạn vẫn có thể đồng bộ nhưng nó không thể song song được.\u003c/p\u003e\n\u003cp\u003eNói một cách khác, một chương trình đồng bộ tốt có thể chạy một cách hiệu quả trên multiprocessor. Đặc tính này thì quan trọng …\u003c/p\u003e\n\u003cp\u003eĐể thêm thông tin chi tiết, hãy tham khảo link dưới này.\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://golang.org/s/concurrency-is-not-parallelism\"\u003ehttp://golang.org/s/concurrency-is-not-parallelism\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003e3.3. Một model để xây dựng phần mềm\u003c/h2\u003e\n\u003cp\u003eDễ hiểu.\u003c/p\u003e\n\u003cp\u003eDễ dùng.\u003c/p\u003e\n\u003cp\u003eDễ nêu lý do.\u003c/p\u003e\n\u003cp\u003eBạn không cần phải là một chuyên gia!\u003c/p\u003e\n\u003cp\u003e(Là dễ dàng hơn nhiều việc đối mặt với các loại xử lý song song (threads, semaphores, locks, barriers,…))\u003c/p\u003e\n\u003cp\u003eCó một lịch sử dài đằng sau tính năng đồng bộ của Go, kể từ thời Hoare’s CSP năm 1978 và thậm chí là những câu lệnh đảm bảo của Dijkstra (1975).\u003c/p\u003e\n\u003ch2\u003e3.4. Ví dụ đơn giản\u003c/h2\u003e\n\u003ch3\u003e3.4.1. Một function đơn giản\u003c/h3\u003e\n\u003cp\u003eChúng ta cần một ví dụ để chỉ ra những đặc tính thú vị nổi bật của việc đồng bộ.\u003c/p\u003e\n\u003cp\u003eĐể tránh xao nhãng, chúng ta sẽ tạo ra một ví dụ đơn giản\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n  f(\u003cspan class=\"hljs-string\"\u003e\"Hello, World\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e500\u003c/span\u003e*time.Millisecond)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003ef\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(msg \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e, delay time.Duration)\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e i := \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e; ; i++ {\n    fmt.Println(msg, i)\n    time.Sleep(delay)\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e3.4.2 Bỏ qua nó\u003c/h3\u003e\n\u003cp\u003eDòng lệnh go thực thi function như bình thường, nhưng không bắt caller phải đợi.\u003c/p\u003e\n\u003cp\u003eNó chạy một goroutine.\u003c/p\u003e\n\u003cp\u003eChức năng tương tự như là \u0026amp; ở cuối một lệnh shell.\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"three\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e300\u003c/span\u003e*time.Millisecond)\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"six\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e600\u003c/span\u003e*time.Millisecond)\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"nine\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e900\u003c/span\u003e*time.Millisecond)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e3.4.3. Bỏ qua nó bớt đi một ít\u003c/h3\u003e\n\u003cp\u003eKhi hàm main return, chương trình kết thúc và function f kết thúc theo nó.\u003c/p\u003e\n\u003cp\u003eChúng ta có thể gặp nhau một ít, và nhân tiện chứng mình rằng cả main và goroutine được tạo ra đều đang chạy\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"three\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e300\u003c/span\u003e*time.Millisecond)\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"six\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e600\u003c/span\u003e*time.Millisecond)\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"nine\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e900\u003c/span\u003e*time.Millisecond)\n  time.Sleep(\u003cspan class=\"hljs-number\"\u003e3\u003c/span\u003e*time.Second)\n  fmt.Println(\u003cspan class=\"hljs-string\"\u003e\"Done.\"\u003c/span\u003e)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e3.4.5. Goroutines\u003c/h3\u003e\n\u003cp\u003eGoroutine là gì? Nó là một function thực thi độc lập, được khởi phát bởi một lệnh go.\u003c/p\u003e\n\u003cp\u003eNó có call stack riêng, sẽ thu giảm theo nhu cầu.\u003c/p\u003e\n\u003cp\u003eCheap. Trong thực tế sẽ có hàng ngàn, thậm chí hàng trăm ngàn goroutine.\u003c/p\u003e\n\u003cp\u003eKhông phải là thread.\u003c/p\u003e\n\u003cp\u003eCó thể có chỉ một thread trong một chương trình với hàng ngàn goroutine.\u003c/p\u003e\n\u003cp\u003eThay vì như vậy, goroutine được phân luồng động thành các thread khi cần thiết để giữ tất cả goroutine hoạt động.\u003c/p\u003e\n\u003cp\u003eBạn có thể nghĩ goroutine gần giống như là một thread rất nhẹ (very cheap)\u003c/p\u003e\n\u003ch3\u003e3.4.6. Channels\u003c/h3\u003e\n\u003cp\u003eMột channel trong Go cung cấp một kết nối giữa hai goroutine, cho phép chung giao tiếp với nhau.\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-comment\"\u003e// Khai báo và khởi tạo\u003c/span\u003e\n\u003cspan class=\"hljs-keyword\"\u003evar\u003c/span\u003e c \u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e c = \u003cspan class=\"hljs-built_in\"\u003emake\u003c/span\u003e(\u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\n\u003cspan class=\"hljs-comment\"\u003e// hoặc\u003c/span\u003e\nc := \u003cspan class=\"hljs-built_in\"\u003emake\u003c/span\u003e(\u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-comment\"\u003e// Gửi đến một channel\u003c/span\u003e\nc \u0026lt;- \u003cspan class=\"hljs-number\"\u003e1\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-comment\"\u003e// Nhận từ một channel\u003c/span\u003e\n\u003cspan class=\"hljs-comment\"\u003e// Dấu mũi tên ám chỉ hướng của dòng dữ liệu.\u003c/span\u003e\nvalue = \u0026lt;-c\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e3.4.7. Sử dụng channel\u003c/h3\u003e\n\u003cp\u003eMột channel sẽ kết nối hàm main và f goroutine để chúng có thể giao tiếp với nhau.\u003c/p\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n  c := \u003cspan class=\"hljs-built_in\"\u003emake\u003c/span\u003e(\u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e)\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"three\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e300\u003c/span\u003e*time.Millisecond, c)\n  \u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e i := \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e; i \u0026lt; \u003cspan class=\"hljs-number\"\u003e10\u003c/span\u003e; i++ {\n    fmt.Println(\u003cspan class=\"hljs-string\"\u003e\"Received\"\u003c/span\u003e, \u0026lt;-c) \u003cspan class=\"hljs-comment\"\u003e// Lệnh Receive chỉ là một giá trị\u003c/span\u003e\n  }\n  fmt.Println(\u003cspan class=\"hljs-string\"\u003e\"Done.\"\u003c/span\u003e)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003ef\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(msg \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e, delay time.Duration, c \u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e)\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e i := \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e; ; i++ {\n    c \u0026lt;- fmt.Sprintf(\u003cspan class=\"hljs-string\"\u003e\"%s %d\"\u003c/span\u003e, msg, i) \u003cspan class=\"hljs-comment\"\u003e// Bất cứ giá trị thích hợp nào có thể được gửi.\u003c/span\u003e\n    time.Sleep(delay)\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003e3.4.8. Đồng bộ\u003c/h3\u003e\n\u003cp\u003eKhi function main thực thi \u0026lt;-c, nó sẽ chờ một giá trị để được gửi.\u003c/p\u003e\n\u003cp\u003eTương tự, khi function f thực thi c\u0026lt;-value, nó sẽ đợi một bên nhận sẵn sàng.\u003c/p\u003e\n\u003cp\u003eMột bên gửi và bên nhận phải đều sẵn sàng thì mới có thể giao tiếp được. Ngược lại chúng ta phải đợi cho đến khi chúng sẵn sàng.\u003c/p\u003e\n\u003cp\u003eVì vậy các channel đều phải giao tiếp và đồng bộ.\u003c/p\u003e\n\u003cp\u003eChannel có thể không buffer hoặc có buffer.\u003c/p\u003e\n\u003ch3\u003e3.4.9. Sử dụng channel giữa nhiều goroutine\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n  c := \u003cspan class=\"hljs-built_in\"\u003emake\u003c/span\u003e(\u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003estring\u003c/span\u003e)\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"three\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e300\u003c/span\u003e*time.Millisecond, c)\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"six\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e600\u003c/span\u003e*time.Millisecond, c)\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e f(\u003cspan class=\"hljs-string\"\u003e\"nine\"\u003c/span\u003e, \u003cspan class=\"hljs-number\"\u003e900\u003c/span\u003e*time.Millisecond, c)\n\n  \u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e i := \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e; i \u0026lt; \u003cspan class=\"hljs-number\"\u003e10\u003c/span\u003e; i++ {\n    fmt.Println(\u003cspan class=\"hljs-string\"\u003e\"Received\"\u003c/span\u003e, \u0026lt;-c)\n  }\n\n  fmt.Println(\u003cspan class=\"hljs-string\"\u003e\"Done.\"\u003c/span\u003e)\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eMột channel đơn có thể được dùng để giao tiếp giữa nhiều (không chỉ là hai) goroutine; nhiều goroutine có thể giao tiếp thông qua một hoặc nhiều channel.\u003c/p\u003e\n\u003cp\u003eĐiều này cho phép tạo ra sự đa dạng trong các cấu trúc đồng bộ (concurrency pattern).\u003c/p\u003e\n\u003ch3\u003e3.4.10. Các yếu tố của một working-stealing scheduler\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eworker\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(in \u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e, out \u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e []\u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e {\n    order := \u0026lt;-in \u003cspan class=\"hljs-comment\"\u003e// Nhận một chỉ thị công việc.\u003c/span\u003e\n    result := factor(order)\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eCác worker sử dụng hai channel để giao tiếp:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ein channel đợi các tính toán về chỉ thị công việc\u003c/li\u003e\n\u003cli\u003eout channel giao tiếp kết quả.\u003c/li\u003e\n\u003cli\u003eBởi vì cân bằng tải, một worker (một cách rất chậm) sẽ tính toán danh sách các ước chung của một chỉ thị cho sẵn.\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003e3.4.11. Một matching giữa producer và consumer\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003eproducer\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(out \u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e order := \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e; ; order++ {\n    out \u0026lt;- order \u003cspan class=\"hljs-comment\"\u003e// Tạo ra một chỉ thị công việc.\u003c/span\u003e\n  }\n}\n\n\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003econsumer\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e(in \u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e []\u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e, n \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\u003c/span\u003e\u003c/span\u003e {\n  \u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e i := \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e; i \u0026lt; n; i++ {\n    result := \u0026lt;-in \u003cspan class=\"hljs-comment\"\u003e// Nhận một kết quả\u003c/span\u003e\n    fmt.Println(\u003cspan class=\"hljs-string\"\u003e\"Consumed\"\u003c/span\u003e, result)\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eBên producer tạo ra và cung cấp không giới hạn chỉ thị công việc và gửi chúng ra ngoài.\u003c/p\u003e\n\u003cp\u003eBên consumer nhận n kết quả từ in channel và sau đó kết thúc.\u003c/p\u003e\n\u003ch3\u003e3.4.12. Gộp tất cả chung với nhau\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003e\u003cspan class=\"hljs-function\"\u003e\u003cspan class=\"hljs-keyword\"\u003efunc\u003c/span\u003e \u003cspan class=\"hljs-title\"\u003emain\u003c/span\u003e\u003cspan class=\"hljs-params\"\u003e()\u003c/span\u003e\u003c/span\u003e {\n  start := time.Now()\n  in := \u003cspan class=\"hljs-built_in\"\u003emake\u003c/span\u003e(\u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)    \u003cspan class=\"hljs-comment\"\u003e// Channel mà thứ tự công việc sẽ được nhận.\u003c/span\u003e\n  out := \u003cspan class=\"hljs-built_in\"\u003emake\u003c/span\u003e(\u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e []\u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e) \u003cspan class=\"hljs-comment\"\u003e// Channel mà kết quả được trả về.\u003c/span\u003e\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e producer(in)\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e worker(in, out)      \u003cspan class=\"hljs-comment\"\u003e// Khởi phát một worker.\u003c/span\u003e\n  consumer(out, \u003cspan class=\"hljs-number\"\u003e100\u003c/span\u003e)\n  fmt.Println(time.Since(start))\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eChúng ta sử dụng một worker đảm nhận tất cả công việc liên quan đến cân bằng tải (work load).\u003c/p\u003e\n\u003cp\u003eBởi vì chỉ có duy nhất một worker, chúng ta có thể thấy kết quả trả ngược về đúng thứ tự.\u003c/p\u003e\n\u003cp\u003eĐoạn này chạy khá là chậm…\u003c/p\u003e\n\u003ch3\u003e3.4.13. Sử dụng 10 worker\u003c/h3\u003e\n\u003cpre class=\"hljs\"\u003e\u003ccode\u003ein := \u003cspan class=\"hljs-built_in\"\u003emake\u003c/span\u003e(\u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e \u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\nout := \u003cspan class=\"hljs-built_in\"\u003emake\u003c/span\u003e(\u003cspan class=\"hljs-keyword\"\u003echan\u003c/span\u003e []\u003cspan class=\"hljs-keyword\"\u003eint\u003c/span\u003e)\n\u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e producer(in) \u003cspan class=\"hljs-comment\"\u003e// Khởi phát 10 workers.\u003c/span\u003e\n\n\u003cspan class=\"hljs-keyword\"\u003efor\u003c/span\u003e i := \u003cspan class=\"hljs-number\"\u003e0\u003c/span\u003e; i \u0026lt; \u003cspan class=\"hljs-number\"\u003e10\u003c/span\u003e; i++ {\n  \u003cspan class=\"hljs-keyword\"\u003ego\u003c/span\u003e worker(in, out)\n}\n\nconsumer(out, \u003cspan class=\"hljs-number\"\u003e100\u003c/span\u003e)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eMột worker sẵn sàng sẽ đọc các chỉ thị tiếp theo từ channel in và bắt đầu làm việc từ đó.\u003c/p\u003e\n\u003cp\u003eMột worker sẵn sàng sẽ tiến hành với các chỉ thị tiếp theo và cứ thế tiếp diễn.\u003c/p\u003e\n\u003cp\u003eBởi vì chúng ta có nhiều worker và vì vậy những chỉ thị khác nhau sẽ tốn thời gian khác nhau, chúng ta thấy kết quả trả về không đúng thứ tự nữa.\u003c/p\u003e\n\u003cp\u003eTrong một hệ thống nhiều core, nhiều worker có thể chạy hoàn toàn song song với nhau.\u003c/p\u003e\n\u003cp\u003eĐoạn mã này thì chạy nhanh hơn nhiều…\u003c/p\u003e\n\u003ch3\u003e3.4.14. Cách tiếp cận của Go\u003c/h3\u003e\n\u003cp\u003eKhông giao tiếp bằng cách chia sẻ bộ nhớ, mà là chia sẻ bộ nhớ bằng  cách giao tiếp.\u003c/p\u003e\n\u003ch2\u003eLinks tham khảo\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003eTrang chủ Go\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://golang.org\"\u003egolang.org\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eGo Tour (học Go qua browser của bạn)\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://tour.golang.org\"\u003etour.golang.org\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eTài liệu về package:\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://golang.org/pkg\"\u003egolang.org/pkg\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eCác bài viết phong phú khác:\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://golang.org/doc\"\u003egolang.org/doc\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n","title":"Golang dành cho dân lập trình C","date":"2020-03-15"}},"__N_SSG":true},"page":"/posts/[id]","query":{"id":"go_for_c_programmers"},"buildId":"6fW2Eq7qap6pq96gw-h_7","nextExport":false,"isFallback":false,"gsp":true,"head":[["meta",{"name":"viewport","content":"width=device-width"}],["meta",{"charSet":"utf-8"}],["link",{"rel":"icon","href":"/favicon.ico"}],["meta",{"name":"description","content":"My personal blog"}],["meta",{"property":"og:image","content":"https://og-image.now.sh/Hai%20Sam's%20Blog.png?theme=light\u0026md=0\u0026fontSize=75px\u0026images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg"}],["meta",{"name":"og:title","content":"Hai Sam's Blog"}],["meta",{"name":"twitter:card","content":"summary_large_image"}],["title",{"children":"Golang dành cho dân lập trình C"}]]}</script><script nomodule="" src="/_next/static/chunks/polyfills-11c8eba6a84e3fddec04.js"></script><script src="/_next/static/chunks/main-d283b4ab393ebd284c3e.js" async=""></script><script src="/_next/static/chunks/webpack-e067438c4cf4ef2ef178.js" async=""></script><script src="/_next/static/chunks/framework.9ec1f7868b3e9d138cdd.js" async=""></script><script src="/_next/static/chunks/commons.e3c12cb767780eaa6561.js" async=""></script><script src="/_next/static/chunks/pages/_app-ded95831299dc0ee3969.js" async=""></script><script src="/_next/static/chunks/7989c093b81d86ddb0abfb342d5bc2e84730435d.a106123a322eba1d4442.js" async=""></script><script src="/_next/static/chunks/pages/posts/%5Bid%5D-f3a8cc6c89a99a8d726d.js" async=""></script><script src="/_next/static/6fW2Eq7qap6pq96gw-h_7/_buildManifest.js" async=""></script><script src="/_next/static/6fW2Eq7qap6pq96gw-h_7/_ssgManifest.js" async=""></script></body></html>

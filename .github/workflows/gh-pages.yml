@@ -1,4 +1,4 @@
-name: Github Pages
+name: GitHub Pages
 
 # masterブランチにプッシュしたときjobsに記述した操作を行う
 on:

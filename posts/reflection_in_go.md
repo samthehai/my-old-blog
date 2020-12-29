@@ -1,5 +1,5 @@
 ---
-title: "Cấu trúc dữ liệu trong Go: Interfaces"
+title: "Reflection trong Go"
 date: "2020-12-27"
 ---
 
@@ -206,7 +206,165 @@ Method `Kind` của v vẫn sẽ là reflect.Int, mặc dù kiểu dữ liệu s
 
 ## 5.2. Reflection đi từ reflection object đến interface value.
 
-## 5.3. Để chỉnh sửa một reflection object, value cần phải có thể được set.
+Giống như hiện tượng vật lý reflection, reflection trong Go cũng có hiện tượng phản ngược của nó.
+Cho một `reflect.Value` ta có thể hồi phục một interface value sử dụng `Interface` method; method này sẽ đóng gói thông tin type và value vào lại một interface đại diện và trả về kết quả.
+
+```Go
+// Interface returns v's value as an interface{}.
+func (v Value) Interface() interface{}
+```
+
+Ta cũng có thể dùng như sau
+
+```Go
+y := v.Interface().(float64) // y will have type float64
+fmt.Println(y)
+```
+
+để in giá trị float64 đại diện bởi reflection object v.
+
+Bởi vì `fmt.Println`, `fmt.Printf`,... đều nhận vào tham số là giá trị interface rỗng và sau đó chúng sẽ được tháo ra bởi package `fmt` như cách chúng ta làm ở ví dụ trên, vì vậy ta có thể làm tốt hơn bằng cách truyền kết quả của method `Interface` vào hàm `fmt.Println`.
+
+```Go
+fmt.Println(v.Interface())
+```
+
+Thậm chí ta có thể sử dụng format floating-point nếu muốn:
+
+```Go
+fmt.Printf("value is %7.1e\n", v.Interface())
+```
+
+sẽ trả ra kết quả `3.4e+00`
+
+## 5.3. Để chỉnh sửa một reflection object, value cần phải settable.
+
+Nguyên tắc thứ ba hơi khó hiểu và dễ gây nhầm lẫn, sẽ dễ hiểu hơn nếu ta bắt đầu từ nguyên lý đầu tiên.
+
+Sau đây là một vài đoạn code không working nhưng mà đáng để xem xét
+
+```Go
+var x float64 = 3.4
+v := reflect.ValueOf(x)
+v.SetFloat(7.1) // Error: will panic.
+```
+
+Nếu bạn thực thi đoạn code này, sẽ có panic với message
+
+```
+panic: reflect.Value.SetFloat using unaddressable value
+```
+
+Vấn đề thì không phải là không xác định được địa chỉ của 7.1, mà là v thì không `settable`. `settable` là đặc tính của reflection Value, nhưng không phải tất cả reflection Values đều có nó.
+
+Ta có thể sử dụng `CanSet` method của `Value` để kiểm tra xem đặc tính `settable` của một `Value`
+
+```Go
+var x float64 = 3.4
+v := reflect.ValueOf(x)
+fmt.Println("settability of v:", v.CanSet())
+```
+
+sẽ ra output
+
+```bash
+settability of v: false
+```
+
+Khi chúng ta gọi Method `Set` cho những Value không có đặc tính `settable` sẽ gây nên lỗi, vậy thì đặc tính này là gì? Nó phản ánh reflection object có khả năng thay đổi giá trị thật được dùng để tạo ra reflection object ban đầu hay không, nó xác định reflection object có lưu giữ item gốc hay không. Khi ta gọi
+
+```Go
+var x float64 = 3.4
+v := reflect.ValueOf(x)
+```
+
+ta truyền một bản copy của x vào method `ValueOf` nên là interface value được tạo ra không nắm giữ giá trị gốc x mà chỉ là bản sao của nó vì vậy mà khi gọi method `Set` sẽ bị panic.
+
+Sau đây ta sẽ thử truyền địa chỉ của x vào method `ValueOf`
+
+```Go
+var x float64 = 3.4
+p := reflect.ValueOf(&x) // Note: take the address of x.
+fmt.Println("type of p:", p.Type())
+fmt.Println("settability of p:", p.CanSet())
+```
+
+output vẫn sẽ là false
+
+```
+type of p: *float64
+settability of p: false
+```
+
+Nhưng thật ra ta sẽ không muốn thay đổi gía trị của p mà giá trị của phần tử được trỏ đến bởi p, vì vậy ta sẽ gọi `Elem` method để lấy giá trị được trỏ đến bởi p
+
+```Go
+v := p.Elem()
+fmt.Println("settability of v:", v.CanSet())
+```
+
+và v giờ thì có đặc tính `setable`
+
+```
+settability of v: true
+```
+
+Cuối cùng ta cũng đã có thể sử dụng method `Set` để thay đổi giá trị của x
+
+```Go
+v.SetFloat(7.1)
+fmt.Println(v.Interface())
+fmt.Println(x)
+```
+
+Và output như mong đợi
+
+```
+7.1
+7.1
+```
+
+# 6. Structs
+
+Một cách phổ biến sử dụng reflection là áp dụng nó để thay đổi các trường của một struct, chỉ cần có địa chỉ của struct ta có thể thay đổi các trường bên trong nó.
+
+```Go
+type T struct {
+  A int
+  B string
+}
+
+t := T{23, "skido"}
+s := reflect.ValueOf(&t).Elem()
+typeOfT := s.Type()
+for i := 0; i < s.NumField(); i++ {
+  f := s.Field(i)
+  fmt.Printf("%d: %s %s = %v\n", i,
+    typeOfT.Field(i).Name, f.Type(), f.Interface())
+}
+```
+
+Output sẽ là
+
+```
+0: A int = 23
+1: B string = skidoo
+```
+
+Có một điểm cần lưu ý ở đây nữa là chỉ những field được export mới có thể là `setable`.
+Bởi vì s chứa một `setable` reflection object, chúng ta có thể thay đổi giá trị của các field bên trong nó
+
+```Go
+s.Field(0).SetInt(77)
+s.Field(1).SetString("Sunset Strip")
+fmt.Println("t is now", t)
+```
+
+Và output sẽ là
+
+```
+t is now {77 Sunset Strip}
+```
 
 # Reference
 
